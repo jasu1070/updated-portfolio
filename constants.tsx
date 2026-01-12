@@ -11,8 +11,8 @@ export const RESUME_DATA = {
   address: "BADODARA, ARAVALI DISTRICT, GUJARAT, INDIA",
 
   // ✅ ONLY LINKS UPDATED (nothing else changed)
-  profile_image: "/profile/123.jpg",
-  resume_url: "/resume/JASHVANT.pdf",
+  profile_image: "profile/123.jpg",
+  resume_url: "resume/JASHVANT.pdf",
 
   objective: "To secure a responsible position where I can apply my skills in machine operation, production quality, and technical processes, while contributing to the growth of the organization and developing my career.",
   skills: [
