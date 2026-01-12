@@ -1,5 +1,6 @@
 ## License
-This project is licensed under the MIT License.
+This project uses a combined license covering source code, content, and portfolio usage.
+See the LICENSE file for full details.
 
 live at>https://jasu1070.github.io/updated-portfolio/
 
