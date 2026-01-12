@@ -1,3 +1,7 @@
+
+
+live at>https://jasu1070.github.io/updated-portfolio/
+
 # Industrial Operations Portfolio - Jashvantbhai Parmar
 
 A high-motion, cinematically styled portfolio web application designed for industrial professionals. This project showcases 9+ years of expertise in Production and Quality Operations through a modern, interactive interface.
