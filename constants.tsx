@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Settings, Cpu, Package, ClipboardCheck, Wrench, ShieldCheck, Gauge, Zap } from 'lucide-react';
 import { ExperienceItem, EducationItem } from './types';
@@ -10,9 +9,11 @@ export const RESUME_DATA = {
   email: "jashvant812@gmail.com",
   phone: "6351456773",
   address: "BADODARA, ARAVALI DISTRICT, GUJARAT, INDIA",
-  // Asset URLs - Replace these with your own
-  profile_image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800",
-  resume_url: "#", // Add your Google Drive link or hosted PDF URL here
+
+  // ✅ ONLY LINKS UPDATED (nothing else changed)
+  profile_image: "/profile/123.jpg",
+  resume_url: "/resume/JASHVANT.pdf",
+
   objective: "To secure a responsible position where I can apply my skills in machine operation, production quality, and technical processes, while contributing to the growth of the organization and developing my career.",
   skills: [
     { name: "Rewinding & Cut-Sheet", icon: <Settings className="w-5 h-5" />, level: 95 },
