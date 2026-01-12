@@ -1,21 +1,86 @@
-MIT License
+PORTFOLIO LICENSE AGREEMENT
+===========================
 
 Copyright (c) 2026 Jashvant Parmar
+All rights reserved unless explicitly stated below.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+--------------------------------------------------
+1. SOURCE CODE LICENSE (DUAL LICENSE)
+--------------------------------------------------
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+All source code contained in this repository (including but not limited to
+files under /src, /components, /pages, /utils, and configuration files)
+is dual-licensed under your choice of:
+
+A) GNU General Public License v3.0 (GPL-3.0)
+OR
+B) MIT License
+
+You may choose either license to govern your use of the source code.
+
+GPL-3.0 Summary:
+- You may use, modify, and distribute the code
+- Any distributed modifications must remain open-source
+- License text: https://www.gnu.org/licenses/gpl-3.0.html
+
+MIT Summary:
+- You may use, modify, and distribute the code
+- Attribution must be preserved
+- License text: https://opensource.org/licenses/MIT
+
+--------------------------------------------------
+2. CONTENT & DESIGN LICENSE (STRICT)
+--------------------------------------------------
+
+All non-code content in this repository is NOT open-source.
+
+This includes, but is not limited to:
+- UI/UX design
+- Layout and visual styling
+- Written text and descriptions
+- Images, icons, and graphics
+- Resume / CV files
+- Branding and personal identity
+
+This content is licensed under:
+
+Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International
+(CC BY-NC-ND 4.0)
+
+You MAY:
+- View and share the content with proper attribution
+
+You MAY NOT:
+- Modify the content
+- Use it commercially
+- Redistribute modified versions
+- Claim authorship
+
+--------------------------------------------------
+3. PORTFOLIO-SPECIFIC RESTRICTIONS
+--------------------------------------------------
+
+This repository represents a personal portfolio.
+
+The following actions are NOT permitted without explicit written permission:
+- Republishing this portfolio as your own
+- Cloning the full portfolio for personal or commercial use
+- Using the resume, branding, or design for impersonation
+- Misrepresenting authorship or ownership
+
+Forking is permitted strictly for educational and learning purposes.
+
+--------------------------------------------------
+4. DISCLAIMER
+--------------------------------------------------
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
+LIABILITY ARISING FROM THE USE OF THIS REPOSITORY.
+
+--------------------------------------------------
+END OF LICENSE
+--------------------------------------------------
