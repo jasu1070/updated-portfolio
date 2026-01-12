@@ -1,4 +1,5 @@
-
+## License
+This project is licensed under the MIT License.
 
 live at>https://jasu1070.github.io/updated-portfolio/
 
