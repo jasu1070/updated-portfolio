@@ -13,42 +13,42 @@ const LoadingScreen: React.FC = () => {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[200] bg-[#0f172a] flex flex-col items-center justify-center">
+    <div className="fixed inset-0 z-[200] bg-slate-50 flex flex-col items-center justify-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         className="relative mb-12"
       >
-        <div className="w-24 h-24 md:w-32 md:h-32 bg-gradient-to-br from-sky-500 to-emerald-600 rounded-3xl flex items-center justify-center font-black text-3xl md:text-5xl text-white shadow-[0_0_50px_rgba(14,165,233,0.3)]">
+        <div className="w-24 h-24 md:w-32 md:h-32 bg-sky-600 rounded-3xl flex items-center justify-center font-black text-3xl md:text-5xl text-white shadow-[0_0_50px_rgba(2,132,199,0.2)] border border-sky-400">
           JP
         </div>
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute inset-[-10px] border-2 border-dashed border-sky-500/20 rounded-[2.5rem]"
+          className="absolute inset-[-10px] border-2 border-dashed border-sky-600/20 rounded-[2.5rem]"
         />
       </motion.div>
 
       <div className="w-64 md:w-80 space-y-4">
         <div className="flex justify-between items-end">
           <div className="space-y-1">
-            <h2 className="text-white font-black font-heading text-xs tracking-[0.2em] uppercase">Initializing System</h2>
-            <p className="text-sky-500/60 text-[10px] font-bold uppercase tracking-widest">Precision Operations v1.1.0</p>
+            <h2 className="text-slate-900 font-black font-heading text-xs tracking-[0.2em] uppercase">Initializing System</h2>
+            <p className="text-sky-600/60 text-[10px] font-bold uppercase tracking-widest">Precision Operations v1.1.0</p>
           </div>
-          <span className="text-sky-500 font-black text-xl font-heading">{progress}%</span>
+          <span className="text-sky-600 font-black text-xl font-heading">{progress}%</span>
         </div>
         
-        <div className="h-1.5 w-full bg-slate-900 rounded-full overflow-hidden border border-slate-800 p-[2px]">
+        <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden border border-slate-300 p-[2px]">
           <motion.div
-            className="h-full bg-gradient-to-r from-sky-500 to-emerald-500 rounded-full shadow-[0_0_15px_rgba(14,165,233,0.5)]"
+            className="h-full bg-sky-600 rounded-full shadow-[0_0_15px_rgba(2,132,199,0.5)]"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
-      <div className="absolute bottom-12 flex gap-12 opacity-20">
+      <div className="absolute bottom-12 flex gap-12 opacity-30">
         {['CNC', 'GMP', 'ISO', '5S'].map((tech) => (
-          <span key={tech} className="text-white text-[10px] font-black tracking-[0.5em]">{tech}</span>
+          <span key={tech} className="text-slate-400 text-[10px] font-black tracking-[0.5em]">{tech}</span>
         ))}
       </div>
     </div>
