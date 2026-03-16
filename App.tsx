@@ -109,7 +109,7 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-slate-950 text-slate-200 selection:bg-sky-500/30">
+    <div className="relative min-h-screen bg-slate-50 text-slate-900 selection:bg-sky-500/20">
       <Background />
 
       {/* Reading Progress Bar */}
@@ -119,13 +119,13 @@ const App: React.FC = () => {
       />
 
       {/* Corporate Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-slate-950/80 border-b border-white/5 no-print">
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/80 border-b border-slate-200 no-print">
         <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
           <div className="flex items-center gap-4 cursor-pointer" onClick={() => scrollTo('hero')}>
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-sky-600 rounded-xl flex items-center justify-center font-black text-white text-lg border border-white/10">JP</div>
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-sky-600 rounded-xl flex items-center justify-center font-black text-white text-lg border border-sky-400">JP</div>
             <div>
-              <div className="text-white font-black text-sm md:text-lg tracking-tighter uppercase leading-none">{RESUME_DATA.name.split(' ')[0]} {RESUME_DATA.name.split(' ')[1]}</div>
-              <div className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Operations Specialist</div>
+              <div className="text-slate-900 font-black text-sm md:text-lg tracking-tighter uppercase leading-none">{DATA.name.split(' ')[0]} {DATA.name.split(' ')[1]}</div>
+              <div className="text-sky-600 text-[10px] font-black uppercase tracking-widest mt-1">Operations Specialist</div>
             </div>
           </div>
 
@@ -134,8 +134,8 @@ const App: React.FC = () => {
               <button
                 key={section.id}
                 onClick={() => scrollTo(section.id)}
-                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-sky-400 ${
-                  activeSection === section.id ? 'text-sky-500' : 'text-slate-400'
+                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-sky-600 ${
+                  activeSection === section.id ? 'text-sky-700' : 'text-slate-500'
                 }`}
               >
                 {section.label}
@@ -143,7 +143,7 @@ const App: React.FC = () => {
             ))}
             <button 
               onClick={() => window.print()}
-              className="px-6 py-2.5 bg-sky-600 text-white font-black rounded-lg text-[10px] uppercase tracking-widest hover:bg-sky-500 transition-all shadow-lg shadow-sky-600/20"
+              className="px-6 py-2.5 bg-slate-900 text-white font-black rounded-lg text-[10px] uppercase tracking-widest hover:bg-slate-800 transition-all shadow-lg"
             >
               Print Record
             </button>
@@ -181,30 +181,27 @@ const App: React.FC = () => {
 
       <main>
         {/* HERO: MAXIMUM EXPOSURE INDUSTRIAL SCALE */}
-        <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-32 pb-20 md:pt-24 overflow-hidden">
-          <div className="absolute inset-0 -z-10 bg-slate-950 no-print">
+        <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-32 pb-20 md:pt-24">
+          <div className="absolute inset-0 -z-10 bg-slate-50 no-print">
             <motion.img 
               initial={{ scale: 1.1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.7 }}
-              transition={{ duration: 1.5 }}
+              animate={{ scale: 1, opacity: 0.15 }}
+              transition={{ duration: 20 }}
               src={DATA.images.factory} 
-              className="w-full h-full object-cover opacity-80 md:opacity-100" 
+              className="w-full h-full object-cover grayscale mix-blend-multiply" 
               alt="Industrial Production Flow" 
             />
-            {/* Smooth transition to light section below */}
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/40 to-slate-950" />
-            <div className="absolute inset-0 bg-sky-500/5 mix-blend-soft-light" />
-            {/* Added bottom-up fade for seamless section jump */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/40 to-slate-50" />
+            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 to-transparent" />
           </div>
 
           <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
              <motion.div
                initial={{ opacity: 0, x: -30 }}
                animate={{ opacity: 1, x: 0 }}
-               className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-sky-400 bg-white/10 backdrop-blur-xl text-white font-black text-[10px] uppercase tracking-[0.4em] mb-12 no-print shadow-xl"
+               className="inline-flex items-center gap-3 px-6 py-2 rounded-full border border-sky-600/30 bg-white shadow-sm text-sky-800 font-black text-[11px] uppercase tracking-[0.4em] mb-12 no-print"
              >
-               <span className="w-2 h-2 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.8)]" />
+               <span className="w-2 h-2 rounded-full bg-sky-600 shadow-[0_0_12px_rgba(2,132,199,0.4)]" />
                Industrial Operations Expert
              </motion.div>
              
@@ -212,10 +209,10 @@ const App: React.FC = () => {
                 <motion.h1 
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black font-heading text-white leading-tight lg:leading-[0.85] tracking-tighter"
+                  className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black font-heading text-slate-900 leading-tight lg:leading-[0.85] tracking-tighter"
                 >
                   {DATA.name.split(' ')[0]}<br />
-                  <span className="text-sky-500">{DATA.name.split(' ').slice(1).join(' ')}</span>
+                  <span className="text-sky-600">{DATA.name.split(' ').slice(1).join(' ')}</span>
                 </motion.h1>
                 
                 <motion.div 
@@ -224,16 +221,16 @@ const App: React.FC = () => {
                   transition={{ delay: 0.5 }}
                   className="max-w-sm mb-6"
                 >
-                   <p className="text-slate-100 text-xl md:text-2xl font-medium leading-tight tracking-tight mb-8">
-                     Precision-first leadership across <span className="font-black underline decoration-sky-500 decoration-4">9+ years</span> in Tier-1 manufacturing.
+                   <p className="text-slate-600 text-xl md:text-2xl font-bold leading-tight tracking-tight mb-8">
+                     Precision-first leadership across <span className="text-sky-600 underline decoration-sky-300 decoration-4 underline-offset-4 font-black">9+ years</span> in Tier-1 manufacturing.
                    </p>
                    <div className="flex gap-4 no-print">
-                      <button onClick={() => scrollTo('pillars')} className="w-14 h-14 bg-white rounded-full flex items-center justify-center text-slate-950 hover:bg-sky-500 hover:text-white transition-all shadow-2xl">
+                      <button onClick={() => scrollTo('gallery')} className="w-14 h-14 bg-sky-600 rounded-full flex items-center justify-center text-white hover:bg-sky-700 transition-all shadow-xl shadow-sky-200">
                         <ArrowRight size={24} />
                       </button>
                       <div className="flex flex-col justify-center">
-                         <span className="text-[10px] font-black text-sky-400 uppercase tracking-widest">Explore Operations</span>
-                         <span className="text-white/50 text-[8px] font-bold">SCROLL FOR SHOWCASE</span>
+                         <span className="text-[10px] font-black text-slate-900 uppercase tracking-widest leading-none mb-1">Explore Operations</span>
+                         <span className="text-slate-400 text-[8px] font-extrabold uppercase tracking-widest">Scroll for Showcase</span>
                       </div>
                    </div>
                 </motion.div>
@@ -242,7 +239,7 @@ const App: React.FC = () => {
         </section>
 
         {/* DYNAMIC BENTO GALLERY: NATURAL COLORS */}
-        <section id="gallery" className="py-24 px-6 bg-slate-950 relative overflow-hidden no-print">
+        <section id="gallery" className="py-24 px-6 bg-white relative overflow-hidden no-print">
            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
            <div className="max-w-7xl mx-auto">
               <div className="flex items-center gap-6 mb-16">
@@ -261,7 +258,7 @@ const App: React.FC = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
                     <div className="absolute bottom-8 left-8">
                        <div className="text-sky-500 font-black text-[10px] tracking-[0.4em] mb-2 uppercase">Core Facility</div>
-                       <h3 className="text-white text-3xl font-black tracking-tighter uppercase">Operations Hub</h3>
+                       <h3 className="text-slate-900 text-3xl font-black tracking-tighter uppercase">Operations Hub</h3>
                     </div>
                  </motion.div>
 
@@ -284,7 +281,7 @@ const App: React.FC = () => {
                    initial={{ opacity: 0, scale: 0.95 }}
                    whileInView={{ opacity: 1, scale: 1 }}
                    transition={{ delay: 0.2 }}
-                    className="relative group rounded-3xl overflow-hidden border border-white/10 bg-slate-900 shadow-xl"
+                    className="relative group rounded-3xl overflow-hidden border border-white/10 bg-white shadow-xl"
                   >
                      <img src={DATA.images.quality} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Quality Control" />
                     <div className="absolute inset-0 bg-gradient-to-tr from-sky-500/20 via-transparent to-transparent" />
@@ -295,11 +292,11 @@ const App: React.FC = () => {
                    initial={{ opacity: 0, scale: 0.95 }}
                    whileInView={{ opacity: 1, scale: 1 }}
                    transition={{ delay: 0.3 }}
-                    className="relative group rounded-3xl overflow-hidden border border-white/10 bg-slate-900 shadow-xl"
+                    className="relative group rounded-3xl overflow-hidden border border-white/10 bg-white shadow-xl"
                   >
                      <img src={DATA.images.measure} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" alt="Measurement Tech" />
                     <div className="absolute bottom-4 left-4 right-4 p-4 bg-slate-950/80 backdrop-blur-xl rounded-2xl border border-white/5 opacity-0 group-hover:opacity-100 transition-opacity">
-                       <p className="text-white font-black text-[8px] tracking-widest uppercase text-center">Verified Audit Standard</p>
+                       <p className="text-slate-600 font-black text-[10px] tracking-widest uppercase text-center">Verified Audit Standard</p>
                     </div>
                  </motion.div>
               </div>
@@ -395,7 +392,7 @@ const App: React.FC = () => {
         <section id="about" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5">
            <div className="grid lg:grid-cols-12 gap-24 items-center">
               <div className="lg:col-span-5">
-                  <div className="relative p-4 bg-slate-900 border border-white/10 rounded-[3rem] shadow-4xl group">
+                  <div className="relative p-4 bg-white border border-slate-200 rounded-[3rem] shadow-4xl group">
                      <img src={DATA.profile_image} className="w-full h-auto rounded-[2.5rem] grayscale contrast-125 filter group-hover:grayscale-0 transition-all duration-1000" alt="Professional Portrait" />
                     <div className="absolute top-1/2 -right-12 -translate-y-1/2 p-8 bg-sky-600 rounded-2xl shadow-4xl text-white font-black no-print">
                        <div className="text-4xl mb-1">09+</div>
@@ -404,44 +401,44 @@ const App: React.FC = () => {
                  </div>
               </div>
                <div className="lg:col-span-7">
-                  <h2 className="text-5xl md:text-8xl font-black font-heading text-white mb-10 tracking-tighter leading-[0.9]">
+                  <h2 className="text-5xl md:text-8xl font-black font-heading text-slate-900 mb-10 tracking-tighter leading-[0.9]">
                      Built on <br />
-                     <span className="text-slate-600 italic">Diligence.</span>
+                     <span className="text-sky-600 italic">Diligence.</span>
                   </h2>
-                  <p className="text-slate-200 text-xl md:text-2xl font-light leading-relaxed mb-12">
+                  <p className="text-slate-700 text-xl md:text-2xl font-bold leading-relaxed mb-12">
                      {DATA.objective}
                   </p>
                   
                   {/* PERSONAL RECORD: THE IDENTITY BLOCK */}
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-8 bg-slate-900/50 border border-white/5 rounded-[2.5rem] no-print">
+                  <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-8 bg-white border border-slate-200 rounded-[2.5rem] shadow-xl no-print">
                      <div className="space-y-1">
-                        <div className="text-[8px] font-black text-slate-500 uppercase tracking-[0.3em]">Date of Birth</div>
-                        <div className="text-white font-bold">{DATA.personal_info.dob}</div>
+                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Date of Birth</div>
+                        <div className="text-slate-900 font-bold">{DATA.personal_info.dob}</div>
                      </div>
                      <div className="space-y-1">
-                        <div className="text-[8px] font-black text-slate-500 uppercase tracking-[0.3em]">Status & Nationality</div>
-                        <div className="text-white font-bold">{DATA.personal_info.marital_status} | {DATA.personal_info.nationality}</div>
-                     </div>
-                     <div className="space-y-1">
-                        <div className="text-[8px] font-black text-slate-500 uppercase tracking-[0.3em]">Languages Known</div>
-                        <div className="text-white font-bold">{DATA.personal_info.languages.join(', ')}</div>
-                     </div>
-                  </div>
+                        <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Status & Nationality</div>
+                        <div className="text-slate-900 font-bold">{DATA.personal_info.marital_status} | {DATA.personal_info.nationality}</div>
+                      </div>
+                      <div className="space-y-1">
+                         <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Languages Known</div>
+                         <div className="text-slate-900 font-bold">{DATA.personal_info.languages.join(', ')}</div>
+                      </div>
+                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-10">
                     <div>
-                       <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 mb-6">Capabilities</h3>
-                       <ul className="space-y-4 text-slate-400 text-sm font-bold">
+                       <h3 className="text-[11px] font-black uppercase tracking-[0.5em] text-slate-900 mb-6 underline decoration-sky-500/30 underline-offset-8">Capabilities</h3>
+                       <ul className="space-y-4 text-slate-700 text-sm font-black">
                           <li className="flex items-center gap-4"><ShieldCheck className="text-sky-500" size={18} /> OPERATIONAL SAFETY</li>
                           <li className="flex items-center gap-4"><Settings className="text-sky-500" size={18} /> MACHINE OPTIMIZATION</li>
                           <li className="flex items-center gap-4"><Package className="text-sky-500" size={18} /> INVENTORY PRECISION</li>
                        </ul>
                     </div>
                      <div>
-                        <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 mb-6">Lifestyle</h3>
+                        <h3 className="text-[11px] font-black uppercase tracking-[0.5em] text-slate-900 mb-6 underline decoration-sky-500/30 underline-offset-8">Lifestyle</h3>
                         <div className="flex flex-wrap gap-2">
                            {DATA.personal_info.hobbies.map((hobby, idx) => (
-                              <span key={idx} className="px-4 py-2 bg-slate-800 rounded-lg text-slate-300 text-[10px] font-bold uppercase tracking-widest border border-white/5">
+                              <span key={idx} className="px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-900 text-[10px] font-black uppercase tracking-widest shadow-sm">
                                  {hobby}
                               </span>
                            ))}
@@ -463,7 +460,7 @@ const App: React.FC = () => {
                     <h2 className="text-7xl md:text-9xl font-black font-heading text-slate-950 tracking-tighter leading-none mb-6">Milestones.</h2>
                     <p className="text-slate-500 text-xl font-medium">Official verified record from 2016 to the present day.</p>
                  </div>
-                 <div className="text-slate-300 font-black text-4xl hidden md:block">09+ YEARS</div>
+                 <div className="text-slate-400 font-black text-4xl hidden md:block">09+ YEARS</div>
               </div>
 
               <div className="grid lg:grid-cols-[1fr_400px] gap-24">
@@ -473,7 +470,7 @@ const App: React.FC = () => {
                           <div className="absolute top-0 -left-[9px] w-4 h-4 rounded-full bg-white border-4 border-sky-600 group-hover:scale-125 transition-transform" />
                           <div className="text-sky-600 font-black text-xs uppercase tracking-[0.4em] mb-4">{exp.period}</div>
                           <h3 className="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter mb-4 leading-none">{exp.role}</h3>
-                          <div className="text-slate-400 font-black text-xs uppercase tracking-[0.2em] mb-10">{exp.company}</div>
+                          <div className="text-slate-700 font-black text-[11px] uppercase tracking-[0.2em] mb-10">{exp.company}</div>
                           <ul className="space-y-4">
                              {exp.description.map((desc, dIdx) => (
                                 <li key={dIdx} className="text-slate-600 text-lg leading-relaxed flex items-start gap-5">
@@ -495,12 +492,12 @@ const App: React.FC = () => {
                           <div className="space-y-10">
                              {RESUME_DATA.skills.map((skill, i) => (
                                 <div key={i} className="space-y-4">
-                                   <div className="flex justify-between font-black uppercase text-[10px] tracking-widest text-slate-400">
+                                   <div className="flex justify-between font-black uppercase text-[11px] tracking-[0.2em] text-slate-900">
                                       <span>{skill.name}</span>
-                                      <span className="text-sky-600">{skill.level}%</span>
+                                      <span className="text-sky-600 underline decoration-sky-200 decoration-2 underline-offset-4">{skill.level}%</span>
                                    </div>
-                                   <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                      <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} className="h-full bg-slate-900" />
+                                   <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden border border-slate-200 shadow-inner">
+                                      <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} className="h-full bg-slate-900 shadow-[0_0_15px_rgba(15,23,42,0.2)]" />
                                    </div>
                                 </div>
                              ))}
@@ -529,15 +526,15 @@ const App: React.FC = () => {
         <section id="education" className="py-40 px-6 max-w-7xl mx-auto border-t border-white/5 no-print">
             <div className="text-center mb-32">
                <div className="text-sky-500 font-black text-xs uppercase tracking-[0.5em] mb-8">Formal Credentials</div>
-               <h2 className="text-6xl md:text-[10rem] font-black font-heading text-white mb-6 uppercase tracking-tighter leading-none">Record.</h2>
+               <h2 className="text-6xl md:text-[10rem] font-black font-heading text-slate-900 mb-6 uppercase tracking-tighter leading-none">Record.</h2>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-10">
                {RESUME_DATA.education.map((edu, i) => (
-                  <div key={i} className="p-12 bg-slate-900/50 border border-white/5 rounded-[3rem] hover:bg-slate-900 transition-colors">
+                  <div key={i} className="p-12 bg-white border border-slate-200 rounded-[3rem] hover:bg-slate-50 transition-colors">
                      <div className="text-sky-500 font-black text-xs mb-6 uppercase tracking-widest bg-sky-500/10 inline-block px-4 py-1 rounded-lg italic">Class of {edu.year}</div>
-                     <h3 className="text-3xl font-black text-white uppercase tracking-tight mb-4 leading-none">{edu.degree}</h3>
+                     <h3 className="text-3xl font-black text-slate-900 uppercase tracking-tight mb-4 leading-none">{edu.degree}</h3>
                      <div className="text-slate-500 text-xs font-black uppercase tracking-[0.2em] mb-8">{edu.institution}</div>
-                     {edu.percentage && <div className="text-6xl font-black text-white/10 group-hover:text-sky-500/20 transition-colors uppercase tracking-widest">{edu.percentage}</div>}
+                     {edu.percentage && <div className="text-6xl font-black text-slate-100 group-hover:text-sky-500/20 transition-colors uppercase tracking-widest">{edu.percentage}</div>}
                   </div>
                ))}
             </div>
