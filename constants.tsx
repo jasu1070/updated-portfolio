@@ -13,27 +13,53 @@ export const RESUME_DATA = {
   // ✅ ONLY LINKS UPDATED (nothing else changed)
   profile_image: "profile/123.jpg",
   resume_url: "resume/JASHVANT.pdf",
+  images: {
+    factory: "generated/factory_real.png",
+    cnc: "generated/cnc_real.png",
+    quality: "generated/quality_real.png",
+    measure: "generated/tools_real.png"
+  },
 
   objective: "To secure a responsible position where I can apply my skills in machine operation, production quality, and technical processes, while contributing to the growth of the organization and developing my career.",
   skills: [
-    { name: "Rewinding & Cut-Sheet", icon: <Settings className="w-5 h-5" />, level: 95 },
-    { name: "CNC Machine Operation", icon: <Cpu className="w-5 h-5" />, level: 90 },
-    { name: "Injection & Molding", icon: <Package className="w-5 h-5" />, level: 88 },
-    { name: "Production & Assembly", icon: <Zap className="w-5 h-5" />, level: 92 },
-    { name: "Machine Setup", icon: <Wrench className="w-5 h-5" />, level: 90 },
-    { name: "Quality Checking", icon: <Gauge className="w-5 h-5" />, level: 95 },
-    { name: "5S & Safety", icon: <ShieldCheck className="w-5 h-5" />, level: 100 },
-    { name: "Inventory/Store", icon: <ClipboardCheck className="w-5 h-5" />, level: 85 }
+    { name: "QC Quality Audit", icon: <ShieldCheck className="w-5 h-5" />, level: 98 },
+    { name: "CNC Punching (Prima Power)", icon: <Cpu className="w-5 h-5" />, level: 95 },
+    { name: "CNC Turning & Milling", icon: <Settings className="w-5 h-5" />, level: 92 },
+    { name: "Injection & Molding", icon: <Package className="w-5 h-5" />, level: 90 },
+    { name: "Rewinding & Cut-Sheet", icon: <Zap className="w-5 h-5" />, level: 95 },
+    { name: "Precision Measurement", icon: <Gauge className="w-5 h-5" />, level: 97 },
+    { name: "5S & Safety SOPs", icon: <Wrench className="w-5 h-5" />, level: 100 },
+    { name: "Production Documentation", icon: <ClipboardCheck className="w-5 h-5" />, level: 94 }
   ],
   experience: [
+    {
+      period: "Current",
+      company: "TATA FICOSA AUTOMOTIVE SYSTEMS",
+      role: "Quality Inspection Specialist",
+      description: [
+        "In-process and final inspection of automotive rear-view mirror systems.",
+        "Utilization of precision tools: Vernier calipers, height gauges, profile gauges.",
+        "Maintaining absolute quality standards for Tier-1 automotive distribution."
+      ]
+    },
+    {
+      period: "2025",
+      company: "INNOVATIVE SOLUTIONS INDIA (FERMATOR GROUP)",
+      role: "CNC Machine Operator",
+      description: [
+        "Specialized operation of Prima Power PS 1225 (CNC Punching Machine).",
+        "Sheet metal fabrication for high-precision industrial components.",
+        "Blueprint interpretation and direct machine parameter adjustment."
+      ]
+    },
     {
       period: "2022 - 2025",
       company: "SUVJAY INDIA LLP",
       role: "Machine Operator",
       description: [
-        "Operated rewinding and cut-sheet machines for consistent output.",
+        "Operated sophisticated rewinding and cut-sheet machines.",
         "Strict adherence to GMP (Good Manufacturing Practices).",
-        "Maintained high hygiene and controlled material handling."
+        "Documenting production logs and conducting regular material audits."
       ]
     },
     {
@@ -41,9 +67,9 @@ export const RESUME_DATA = {
       company: "Fiem Industries Limited",
       role: "Machine Operator",
       description: [
-        "Tier-1 OEM Supplier environment.",
-        "Molding machine operation (injection/compression).",
-        "Performed routine quality inspections using precision tools."
+        "Injection and compression molding in a Tier-1 OEM environment.",
+        "Routine quality inspections using micrometers and precision gauges.",
+        "Minimizing scrap rate through predictive machine monitoring."
       ]
     },
     {
@@ -51,9 +77,9 @@ export const RESUME_DATA = {
       company: "ZEETA ELECTRICAL ENGINEERING",
       role: "Production Supervisor",
       description: [
-        "Managed workflow and assigned responsibilities.",
-        "Guided and coached employees to monitor productivity.",
-        "Verified production output against strict specifications."
+        "Strategic workflow management and productivity optimization.",
+        "Coaching and guiding production staff on safety and quality SOPs.",
+        "Verifying final assembly output against engineering specifications."
       ]
     },
     {
@@ -61,9 +87,9 @@ export const RESUME_DATA = {
       company: "MUSCOT PUMP LIMITED",
       role: "Store Keeper",
       description: [
-        "Inventory management and sales recording.",
-        "Planned promotional campaigns for new products.",
-        "Mediated confrontations and de-escalated staff-client issues."
+        "Inventory logistics and comprehensive sales record management.",
+        "Implementing 5S standards for material handling and storage.",
+        "Promotional campaign assistance and client-staff mediation."
       ]
     },
     {
@@ -71,9 +97,9 @@ export const RESUME_DATA = {
       company: "Lubi Industries LLP",
       role: "CNC Machine Operator",
       description: [
-        "CNC turning/milling for precision pump components.",
-        "Adjusted offsets and loaded programs as per job specs.",
-        "Monitored machining accuracy using calipers and micrometers."
+        "CNC turning/milling for precision pump and motor components.",
+        "Program loading and tool offset adjustments for extreme tolerances.",
+        "Dimensional verification using high-precision digital calipers."
       ]
     },
     {
@@ -81,17 +107,16 @@ export const RESUME_DATA = {
       company: "ARVIND LIMITED",
       role: "Product Quality Inspector",
       description: [
-        "Monitored incoming/outgoing product quality.",
-        "Conducted tests and analyzed measurements.",
-        "Overseeing production line standards."
+        "Monitoring production line quality standards for incoming/outgoing goods.",
+        "Conducting material strength tests and analyze complex measurements.",
+        "Overseeing final quality clearance for industrial distributions."
       ]
     }
   ] as ExperienceItem[],
   education: [
     { degree: "Software & Hardware Networking", institution: "Prakshal InfoTech", year: "2016" },
     { degree: "Diploma in Elementary College", institution: "N.H. Shah PTC College", year: "2014", percentage: "61%" },
-    { degree: "Basic Computer Course", institution: "ITI Modasa", year: "2013" },
-    { degree: "HSC", institution: "UB Vidhyalaya", year: "2012", percentage: "61%" },
-    { degree: "SSC", institution: "UB Vidhyalaya", year: "2010", percentage: "51%" }
+    { degree: "HSC", institution: "UB Vidhyalaya (GSHSEB)", year: "2012", percentage: "61%" },
+    { degree: "SSC", institution: "UB Vidhyalaya (GSSB)", year: "2010", percentage: "51%" }
   ] as EducationItem[]
 };

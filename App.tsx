@@ -1,20 +1,29 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Download, 
-  ChevronRight, 
-  Briefcase, 
-  GraduationCap, 
-  User, 
-  Code2, 
-  ChevronDown,
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Download,
+  ChevronRight,
+  Briefcase,
+  GraduationCap,
+  User,
+  ShieldCheck,
+  Package,
+  Settings,
+  Cpu,
+  Wrench,
+  Zap,
+  Gauge,
+  Factory,
+  Database,
+  ArrowRight,
   Menu,
   X,
-  Printer
+  Printer,
+  FileText
 } from 'lucide-react';
 import { RESUME_DATA } from './constants';
 import Background from './components/Background';
@@ -23,8 +32,8 @@ import SkillCard from './components/SkillCard';
 import EducationCard from './components/EducationCard';
 
 const App: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
@@ -34,6 +43,7 @@ const App: React.FC = () => {
 
   const sections = [
     { id: 'hero', label: 'Home' },
+    { id: 'pillars', label: 'Expertise' },
     { id: 'about', label: 'About' },
     { id: 'experience', label: 'Experience' },
     { id: 'skills', label: 'Skills' },
@@ -44,7 +54,7 @@ const App: React.FC = () => {
   const handleScroll = useCallback(() => {
     const sectionElements = sections.map(s => document.getElementById(s.id));
     const scrollPosition = window.scrollY + 120;
-    
+
     sectionElements.forEach((el, idx) => {
       if (el && scrollPosition >= el.offsetTop && scrollPosition < el.offsetTop + el.offsetHeight) {
         setActiveSection(sections[idx].id);
@@ -72,384 +82,371 @@ const App: React.FC = () => {
     }
   };
 
-  const handlePrint = () => {
-    window.print();
-  };
-
   return (
-    <div className="relative w-full min-h-screen selection:bg-amber-500 selection:text-black">
+    <div className="relative min-h-screen bg-slate-950 text-slate-200 selection:bg-sky-500/30">
       <Background />
 
-      <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-500 to-orange-600 origin-left z-[100] no-print"
+      {/* Reading Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-sky-600 origin-left z-[100] no-print"
         style={{ scaleX }}
       />
 
-      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/60 border-b border-white/5 no-print">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-2 md:gap-3 cursor-pointer"
-            onClick={() => scrollTo('hero')}
-          >
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg md:rounded-xl flex items-center justify-center font-black text-lg md:text-xl text-black shadow-lg shadow-amber-500/20">
-              JP
+      {/* Corporate Navigation */}
+      <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-slate-950/80 border-b border-white/5 no-print">
+        <div className="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+          <div className="flex items-center gap-4 cursor-pointer" onClick={() => scrollTo('hero')}>
+            <div className="w-10 h-10 md:w-12 md:h-12 bg-sky-600 rounded-xl flex items-center justify-center font-black text-white text-lg border border-white/10">JP</div>
+            <div>
+              <div className="text-white font-black text-sm md:text-lg tracking-tighter uppercase leading-none">{RESUME_DATA.name.split(' ')[0]} {RESUME_DATA.name.split(' ')[1]}</div>
+              <div className="text-slate-500 text-[10px] font-black uppercase tracking-widest mt-1">Operations Specialist</div>
             </div>
-            <span className="font-heading text-base md:text-lg font-bold tracking-tight hidden sm:block uppercase">
-              {RESUME_DATA.name.split(' ')[0]}
-            </span>
-          </motion.div>
+          </div>
 
-          <div className="hidden md:flex items-center gap-10">
-            {sections.map((s) => (
+          <div className="hidden lg:flex items-center gap-10">
+            {sections.map((section) => (
               <button
-                key={s.id}
-                onClick={() => scrollTo(s.id)}
-                className={`text-xs font-bold uppercase tracking-widest transition-all hover:text-amber-500 ${
-                  activeSection === s.id ? 'text-amber-500' : 'text-gray-400'
+                key={section.id}
+                onClick={() => scrollTo(section.id)}
+                className={`text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-sky-400 ${
+                  activeSection === section.id ? 'text-sky-500' : 'text-slate-400'
                 }`}
               >
-                {s.label}
+                {section.label}
               </button>
             ))}
-          </div>
-
-          <div className="hidden md:flex items-center gap-3">
-            {RESUME_DATA.resume_url !== "#" && (
-              <a 
-                href={RESUME_DATA.resume_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-2.5 bg-white/5 border border-white/10 text-white rounded-full font-black text-xs uppercase tracking-tighter hover:bg-white/10 transition-all"
-              >
-                <Download size={14} />
-                Download
-              </a>
-            )}
-            <motion.button 
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(255,255,255,0.1)" }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handlePrint}
-              className="flex items-center gap-2 px-6 py-2.5 bg-white text-black rounded-full font-black text-xs uppercase tracking-tighter transition-all"
+            <button 
+              onClick={() => window.print()}
+              className="px-6 py-2.5 bg-sky-600 text-white font-black rounded-lg text-[10px] uppercase tracking-widest hover:bg-sky-500 transition-all shadow-lg shadow-sky-600/20"
             >
-              <Printer size={14} />
-              Export PDF
-            </motion.button>
+              Print Record
+            </button>
           </div>
 
-          <button className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button className="lg:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
-      </nav>
 
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden no-print"
-          >
-            {sections.map((s) => (
-              <button
-                key={s.id}
-                onClick={() => scrollTo(s.id)}
-                className={`text-3xl font-black font-heading tracking-tighter ${activeSection === s.id ? 'text-amber-500' : 'text-gray-400'}`}
-              >
-                {s.label}
-              </button>
-            ))}
-            <div className="flex flex-col gap-4 w-full px-12">
-              {RESUME_DATA.resume_url !== "#" && (
-                <a 
-                  href={RESUME_DATA.resume_url}
-                  className="w-full py-4 bg-white/10 text-white font-black rounded-2xl flex items-center justify-center gap-3"
-                >
-                  <Download size={20} /> Download PDF
-                </a>
-              )}
-              <button 
-                onClick={handlePrint}
-                className="w-full py-4 bg-amber-500 text-black font-black rounded-2xl flex items-center justify-center gap-3"
-              >
-                <Printer size={20} /> Export Resume
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <main>
-        <section 
-          id="hero" 
-          className="relative min-h-screen flex flex-col items-center justify-center px-6 pt-20"
-        >
-          <div className="text-center z-10">
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="inline-block px-4 py-1.5 rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-500 font-black text-[10px] uppercase tracking-[0.2em] mb-8 no-print"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="lg:hidden bg-slate-900 border-b border-white/5 overflow-hidden no-print"
             >
-              Certified Production Expert
-            </motion.div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, type: 'spring' }}
-              className="font-heading text-5xl sm:text-7xl md:text-9xl font-black mb-6 md:mb-8 tracking-tighter leading-[0.9] px-2"
-            >
-              {RESUME_DATA.name.split(' ')[1]} <br /> 
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 animate-gradient">
-                {RESUME_DATA.name.split(' ')[0]}
-              </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-gray-400 text-base md:text-2xl max-w-2xl mx-auto mb-10 md:mb-12 font-light tracking-tight leading-relaxed px-4"
-            >
-              Production Supervisor & Machine Operations Specialist with <span className="text-white font-bold">9+ years</span> of precision-focused excellence in tier-1 manufacturing.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-5 no-print"
-            >
-              <button 
-                onClick={() => scrollTo('experience')}
-                className="group relative px-10 py-5 bg-amber-500 text-black font-black rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(245,158,11,0.25)] transition-all hover:-translate-y-1 hover:shadow-amber-500/40"
-              >
-                <span className="relative z-10 flex items-center gap-3 text-sm uppercase tracking-widest">
-                  Experience <ChevronRight size={18} />
-                </span>
-                <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-              </button>
-              <button 
-                onClick={() => scrollTo('contact')}
-                className="px-10 py-5 bg-white/5 border border-white/10 text-white font-black rounded-2xl hover:bg-white/10 transition-all text-sm uppercase tracking-widest backdrop-blur-sm"
-              >
-                Hire Me
-              </button>
-            </motion.div>
-          </div>
-
-          <motion.div 
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-gray-600 flex flex-col items-center gap-3 no-print cursor-pointer"
-            onClick={() => scrollTo('about')}
-          >
-            <div className="w-[2px] h-12 bg-gradient-to-b from-amber-500/0 via-amber-500 to-amber-500/0" />
-            <span className="text-[10px] uppercase tracking-[0.3em] font-black">Explore</span>
-          </motion.div>
-        </section>
-
-        <section id="about" className="py-32 px-6 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-5 relative lg:sticky top-32"
-            >
-              <div className="aspect-[4/5] sm:aspect-[4/5] bg-white/5 border border-white/10 rounded-3xl md:rounded-[2.5rem] overflow-hidden group shadow-2xl">
-                <img 
-                  src={RESUME_DATA.profile_image} 
-                  alt="Industrial Professional" 
-                  className="absolute inset-0 w-full h-full object-cover grayscale md:opacity-40 group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-1000 scale-105 group-hover:scale-100"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
-                  <h3 className="text-2xl md:text-4xl font-black font-heading mb-3 tracking-tighter">TECHNICAL CORE</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {["CNC", "QUALITY", "OPERATIONS"].map(t => (
-                      <span key={t} className="px-3 py-1 bg-amber-500/20 text-amber-500 text-[10px] font-black rounded-lg border border-amber-500/20">{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="lg:col-span-7"
-            >
-              <div className="flex items-center gap-4 text-amber-500 mb-8 no-print">
-                <div className="w-8 h-[2px] bg-amber-500" />
-                <span className="uppercase tracking-[0.2em] text-xs font-black">Introduction</span>
-              </div>
-              <h2 className="text-4xl md:text-7xl font-black font-heading mb-6 md:mb-10 leading-[0.95] tracking-tighter">
-                Precision & <br /><span className="text-gray-600">Performance.</span>
-              </h2>
-              <p className="text-gray-400 text-base md:text-xl leading-relaxed mb-8 md:mb-12 font-light">
-                {RESUME_DATA.objective}
-              </p>
-              
-              <div className="grid sm:grid-cols-2 gap-8">
-                <div className="group p-6 md:p-8 bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl hover:border-amber-500/30 transition-all">
-                   <div className="w-10 h-10 md:w-12 md:h-12 bg-amber-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-amber-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform">
-                      <MapPin size={20} />
-                   </div>
-                   <h4 className="text-white font-black text-xs uppercase tracking-widest mb-2">Based in</h4>
-                   <p className="text-gray-400 font-medium text-sm md:text-base">{RESUME_DATA.address}</p>
-                </div>
-                <div className="group p-6 md:p-8 bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl hover:border-amber-500/30 transition-all">
-                   <div className="w-10 h-10 md:w-12 md:h-12 bg-amber-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-amber-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform">
-                      <Briefcase size={20} />
-                   </div>
-                   <h4 className="text-white font-black text-xs uppercase tracking-widest mb-2">Track Record</h4>
-                   <p className="text-gray-400 font-medium text-sm md:text-base">9+ Years of Field Expertise</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        <section id="experience" className="py-32 px-6 bg-white/[0.02]">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row items-end justify-between mb-20 gap-8">
-              <div className="max-w-xl">
-                <div className="flex items-center gap-4 text-amber-500 mb-6 no-print">
-                  <div className="w-8 h-[2px] bg-amber-500" />
-                  <span className="uppercase tracking-[0.2em] text-xs font-black">History</span>
-                </div>
-                <h2 className="text-4xl md:text-8xl font-black font-heading tracking-tighter leading-none">Career Path</h2>
-              </div>
-              <div className="text-gray-500 font-black text-sm uppercase tracking-widest hidden md:block no-print">
-                2016 — PRESENT
-              </div>
-            </div>
-            
-            <div className="space-y-4">
-              {RESUME_DATA.experience.map((exp, idx) => (
-                <ExperienceCard key={idx} exp={exp} index={idx} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="skills" className="py-32 px-6 max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-5">
-              <div className="flex items-center gap-4 text-amber-500 mb-6 no-print">
-                <div className="w-8 h-[2px] bg-amber-500" />
-                <span className="uppercase tracking-[0.2em] text-xs font-black">Capabilities</span>
-              </div>
-              <h2 className="text-4xl md:text-7xl font-black font-heading mb-6 md:mb-10 tracking-tighter leading-[0.95]">
-                Technical <br /> Mastery.
-              </h2>
-              <p className="text-gray-400 text-lg mb-12 font-light leading-relaxed">
-                Expertise built across various industrial disciplines, from heavy machinery setup to precise quality control audits.
-              </p>
-              <div className="grid grid-cols-2 gap-4 no-print">
-                {["5S EXPERT", "GMP", "ISO-STD", "LEAN"].map(tag => (
-                   <div key={tag} className="px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-center text-[10px] font-black tracking-widest text-amber-500 hover:bg-amber-500/10 transition-all">
-                     {tag}
-                   </div>
+              <div className="px-6 py-10 space-y-6">
+                {sections.map((section) => (
+                  <button
+                    key={section.id}
+                    onClick={() => scrollTo(section.id)}
+                    className="block w-full text-left text-lg font-black text-white uppercase tracking-tighter"
+                  >
+                    {section.label}
+                  </button>
                 ))}
               </div>
-            </div>
-            
-            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-4">
-              {RESUME_DATA.skills.map((skill, idx) => (
-                <SkillCard key={idx} skill={skill} index={idx} />
-              ))}
-            </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </nav>
+
+      <main>
+        {/* HERO: HIGH-VISIBILITY INDUSTRIAL BACKDROP */}
+        <section id="hero" className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+          <div className="absolute inset-0 -z-10 no-print">
+            <img 
+              src={(RESUME_DATA as any).images?.factory} 
+              className="w-full h-full object-cover scale-105" 
+              alt="Industrial Production Flow" 
+            />
+            {/* Minimalist overlay to ensure text readability without hiding the background */}
+            <div className="absolute inset-0 bg-slate-950/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-slate-950/10" />
+          </div>
+
+          <div className="max-w-7xl mx-auto px-6 relative z-10 w-full text-center md:text-left">
+             <motion.div
+               initial={{ opacity: 0, x: -20 }}
+               animate={{ opacity: 1, x: 0 }}
+               className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-sky-500/30 bg-sky-500/10 text-sky-400 font-black text-[10px] uppercase tracking-[0.4em] mb-12 no-print backdrop-blur-md"
+             >
+               <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+               Operational Excellence System
+             </motion.div>
+             <motion.h1 
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8 }}
+               className="text-6xl sm:text-7xl md:text-9xl font-black font-heading text-white leading-[0.8] tracking-tighter mb-10"
+             >
+               {RESUME_DATA.name.split(' ')[0]}<br />
+               <span className="text-slate-500/50">{RESUME_DATA.name.split(' ').slice(1).join(' ')}</span>
+             </motion.h1>
+             <motion.p
+               initial={{ opacity: 0 }}
+               animate={{ opacity: 1 }}
+               transition={{ delay: 0.4 }}
+               className="text-slate-100 text-lg md:text-2xl max-w-3xl mb-12 font-medium leading-relaxed tracking-tight text-shadow-sm"
+             >
+               Mastering complex machine operations and industrial supervision with <span className="text-sky-400 font-black">9+ years</span> of precision-first service in global manufacturing.
+             </motion.p>
+             <motion.div 
+               initial={{ opacity: 0, y: 30 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.6 }}
+               className="flex flex-wrap items-center justify-center md:justify-start gap-6 no-print"
+             >
+               <button onClick={() => scrollTo('pillars')} className="px-12 py-5 bg-sky-600 text-white font-black rounded-xl hover:bg-white hover:text-slate-950 transition-all text-sm uppercase tracking-widest shadow-2xl shadow-sky-600/30">View Expertise</button>
+               <button onClick={() => scrollTo('about')} className="px-12 py-5 bg-transparent border-2 border-white/20 text-white font-black rounded-xl hover:bg-white/5 transition-all text-sm uppercase tracking-widest backdrop-blur-sm">Profile</button>
+             </motion.div>
           </div>
         </section>
 
-        <section id="education" className="py-32 px-6 bg-white/[0.02]">
-          <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 md:mb-24">
-              <h2 className="text-4xl md:text-8xl font-black font-heading tracking-tighter mb-4">Qualifications</h2>
-              <p className="text-gray-500 uppercase tracking-[0.4em] font-black text-[10px] md:text-xs">Foundation of knowledge</p>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {RESUME_DATA.education.map((edu, idx) => (
-                <EducationCard key={idx} edu={edu} index={idx} />
+        {/* NEW: OPERATIONAL SHOWCASE GALLERY (using all images) */}
+        <section id="gallery" className="py-12 bg-slate-950 border-y border-white/5 no-print">
+           <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+              {[
+                { img: (RESUME_DATA as any).images?.factory, label: 'Factory Layout' },
+                { img: (RESUME_DATA as any).images?.cnc, label: 'CNC Operations' },
+                { img: (RESUME_DATA as any).images?.quality, label: 'Quality Audit' },
+                { img: (RESUME_DATA as any).images?.measure, label: 'Precision Tech' }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i} 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="group relative aspect-square rounded-2xl overflow-hidden border border-white/5 bg-slate-900"
+                >
+                   <img src={item.img} className="w-full h-full object-cover opacity-50 group-hover:opacity-100 transition-all duration-700 group-hover:scale-110" alt={item.label} />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent flex items-end p-4">
+                      <span className="text-[10px] font-black uppercase tracking-widest text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0 duration-500">{item.label}</span>
+                   </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+           </div>
         </section>
 
-        <section id="contact" className="py-20 md:py-32 px-4 md:px-6 max-w-7xl mx-auto no-print">
-          <div className="bg-gradient-to-br from-amber-500 via-orange-600 to-amber-700 rounded-3xl md:rounded-[3.5rem] p-8 md:p-24 relative overflow-hidden shadow-2xl shadow-amber-500/20">
-             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-             
-             <div className="relative z-10 grid lg:grid-cols-2 gap-20 items-center">
-               <div>
-               <div className="space-y-6 md:space-y-10">
-                    <a href={`mailto:${RESUME_DATA.email}`} className="flex items-center gap-4 md:gap-6 group">
-                      <div className="w-12 h-12 md:w-16 md:h-16 bg-black rounded-2xl md:rounded-3xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
-                        <Mail size={24} md:size={32} />
-                      </div>
-                      <div>
-                        <p className="text-black/60 text-[10px] uppercase tracking-widest font-black mb-1">Email</p>
-                        <p className="text-black text-lg md:text-2xl font-black tracking-tight underline decoration-2 underline-offset-4 break-all md:break-normal">{RESUME_DATA.email}</p>
-                      </div>
-                    </a>
-                    
-                    <a href={`tel:${RESUME_DATA.phone}`} className="flex items-center gap-4 md:gap-6 group">
-                      <div className="w-12 h-12 md:w-16 md:h-16 bg-black rounded-2xl md:rounded-3xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
-                        <Phone size={24} md:size={32} />
-                      </div>
-                      <div>
-                        <p className="text-black/60 text-[10px] uppercase tracking-widest font-black mb-1">Phone</p>
-                        <p className="text-black text-lg md:text-2xl font-black tracking-tight">{RESUME_DATA.phone}</p>
-                      </div>
-                    </a>
-                  </div>
-               </div>
-               
-               <div className="bg-black/20 backdrop-blur-3xl border border-white/20 p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] shadow-xl">
-                 <form className="space-y-6 md:space-y-8" onSubmit={(e) => e.preventDefault()}>
-                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                     <div>
-                       <label className="block text-[10px] uppercase text-white/60 mb-3 font-black tracking-widest">Name</label>
-                       <input className="w-full bg-white/10 border border-white/20 rounded-2xl px-6 py-4 outline-none focus:border-white transition-all text-white placeholder:text-white/30" placeholder="Full Name" />
-                     </div>
-                     <div>
-                       <label className="block text-[10px] uppercase text-white/60 mb-3 font-black tracking-widest">Company</label>
-                       <input className="w-full bg-white/10 border border-white/20 rounded-2xl px-6 py-4 outline-none focus:border-white transition-all text-white placeholder:text-white/30" placeholder="Organization" />
-                     </div>
-                   </div>
-                   <div>
-                     <label className="block text-[10px] uppercase text-white/60 mb-3 font-black tracking-widest">Message</label>
-                     <textarea rows={4} className="w-full bg-white/10 border border-white/20 rounded-2xl px-6 py-4 outline-none focus:border-white transition-all text-white placeholder:text-white/30 resize-none" placeholder="How can I help?" />
-                   </div>
-                   <button className="w-full py-5 bg-black text-amber-500 font-black rounded-2xl hover:bg-zinc-900 transition-all shadow-xl flex items-center justify-center gap-3 uppercase tracking-widest text-sm">
-                     Submit Message <ChevronRight size={20} />
-                   </button>
-                 </form>
-               </div>
-             </div>
-          </div>
+        {/* EXPERTISE PILLARS: INDUSTRIAL MEDIA */}
+        <section id="pillars" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5 no-print">
+           <div className="grid lg:grid-cols-2 gap-32 items-center mb-40">
+              <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }}>
+                 <div className="flex items-center gap-4 text-sky-500 mb-8 font-black text-xs uppercase tracking-[0.4em]">
+                    <div className="w-10 h-[1px] bg-sky-500" />
+                    <span>Focus 01</span>
+                 </div>
+                 <h2 className="text-5xl md:text-7xl font-black font-heading text-white mb-8 tracking-tighter">Precision <br />Machining.</h2>
+                 <p className="text-slate-400 text-xl leading-relaxed font-medium mb-10">
+                    Advanced operation of CNC turning and milling centers. Adjusting offsets and tool parameters to satisfy extreme tolerance requirements for critical pump and automotive components.
+                 </p>
+                 <div className="grid grid-cols-2 gap-4">
+                    {['CNC TURNING', 'VMC OPS', 'TOOLING', 'LAYOUT'].map(t => (
+                      <div key={t} className="p-5 bg-slate-900 border border-white/5 rounded-2xl text-[10px] font-black tracking-[0.2em] text-center text-slate-300">{t}</div>
+                    ))}
+                 </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="relative group">
+                 <div className="aspect-[16/10] bg-slate-800 rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
+                    <img src={(RESUME_DATA as any).images?.cnc} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="CNC Machining" />
+                 </div>
+                 <div className="absolute -bottom-8 -right-8 p-10 bg-sky-600 rounded-3xl shadow-3xl text-white">
+                    <Settings size={40} />
+                 </div>
+              </motion.div>
+           </div>
+
+           <div className="grid lg:grid-cols-2 gap-32 items-center">
+              <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} className="lg:order-2 relative group">
+                 <div className="aspect-[16/10] bg-slate-800 rounded-[3rem] overflow-hidden border border-white/10 shadow-3xl">
+                    <img src={(RESUME_DATA as any).images?.measure} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" alt="Quality Measurement" />
+                 </div>
+                 <div className="absolute -top-8 -left-8 p-10 bg-slate-800 border border-white/10 rounded-3xl shadow-3xl text-sky-500">
+                    <Gauge size={40} />
+                 </div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, x: 50 }} whileInView={{ opacity: 1, x: 0 }} className="lg:order-1 text-right">
+                 <div className="flex items-center justify-end gap-4 text-sky-500 mb-8 font-black text-xs uppercase tracking-[0.4em]">
+                    <span>Focus 02</span>
+                    <div className="w-10 h-[1px] bg-sky-500" />
+                 </div>
+                 <h2 className="text-5xl md:text-7xl font-black font-heading text-white mb-8 tracking-tighter">Quality <br />Metric Control.</h2>
+                 <p className="text-slate-400 text-xl leading-relaxed font-medium mb-10">
+                    Implementing non-negotiable inspection standards for incoming and outgoing components. Expert in digital caliper and micrometer precision verification.
+                 </p>
+                 <div className="relative rounded-2xl overflow-hidden border border-white/5 h-40 group cursor-default">
+                    <img src={(RESUME_DATA as any).images?.quality} className="w-full h-full object-cover opacity-30 group-hover:opacity-60 transition-all" alt="QC Lab" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                       <p className="text-white font-black text-lg uppercase tracking-tighter italic">"100% Quality Rate Record"</p>
+                    </div>
+                 </div>
+              </motion.div>
+           </div>
         </section>
+
+        {/* ABOUT: AUTHENTIC PROFILE CENTERPIECE */}
+        <section id="about" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5">
+           <div className="grid lg:grid-cols-12 gap-24 items-center">
+              <div className="lg:col-span-5">
+                 <div className="relative p-4 bg-slate-900 border border-white/10 rounded-[3rem] shadow-4xl group">
+                    <img src={RESUME_DATA.profile_image} className="w-full h-auto rounded-[2.5rem] grayscale contrast-125 filter group-hover:grayscale-0 transition-all duration-1000" alt="Professional Portrait" />
+                    <div className="absolute top-1/2 -right-12 -translate-y-1/2 p-8 bg-sky-600 rounded-2xl shadow-4xl text-white font-black no-print">
+                       <div className="text-4xl mb-1">09+</div>
+                       <div className="text-[8px] uppercase tracking-[0.3em]">SERVICE YEARS</div>
+                    </div>
+                 </div>
+              </div>
+              <div className="lg:col-span-7">
+                 <h2 className="text-5xl md:text-8xl font-black font-heading text-white mb-10 tracking-tighter leading-[0.9]">Built on <br /><span className="text-slate-600 italic">Diligence.</span></h2>
+                 <p className="text-slate-200 text-xl md:text-2xl font-light leading-relaxed mb-12">
+                   {RESUME_DATA.objective}
+                 </p>
+                 <div className="grid sm:grid-cols-2 gap-10">
+                    <div>
+                       <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 mb-6">Capabilities</h3>
+                       <ul className="space-y-4 text-slate-400 text-sm font-bold">
+                          <li className="flex items-center gap-4"><ShieldCheck className="text-sky-500" size={18} /> OPERATIONAL SAFETY</li>
+                          <li className="flex items-center gap-4"><Settings className="text-sky-500" size={18} /> MACHINE OPTIMIZATION</li>
+                          <li className="flex items-center gap-4"><Package className="text-sky-500" size={18} /> INVENTORY PRECISION</li>
+                       </ul>
+                    </div>
+                    <div>
+                       <h3 className="text-[10px] font-black uppercase tracking-[0.5em] text-slate-500 mb-6">Standards</h3>
+                       <p className="text-slate-400 text-sm font-bold leading-relaxed">
+                          STRICT ADHERENCE TO ISO, GMP, AND 5S PRINCIPLES IN ALL TIER-1 MANUFACTURING ENVIRONMENTS.
+                       </p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* EXPERIENCE & SKILLS: PROFESSIONAL TIMELINE */}
+        <section id="experience" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5 bg-slate-900/30 rounded-[3.5rem]">
+           <div className="text-center mb-32">
+              <h2 className="text-6xl md:text-9xl font-black font-heading text-white tracking-tighter mb-4">Milestones.</h2>
+              <div className="w-20 h-1 bg-sky-600 mx-auto" />
+           </div>
+
+           <div className="grid lg:grid-cols-[1fr_400px] gap-24">
+              <div className="space-y-24">
+                 {RESUME_DATA.experience.map((exp, i) => (
+                    <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} className="relative pl-12 border-l-2 border-slate-800">
+                       <div className="absolute top-0 -left-[9px] w-4 h-4 rounded-full bg-sky-600 shadow-[0_0_15px_rgba(14,165,233,0.5)]" />
+                       <div className="text-sky-500 font-black text-xs uppercase tracking-[0.4em] mb-4">{exp.period}</div>
+                       <h3 className="text-3xl md:text-4xl font-black text-white uppercase tracking-tighter mb-2">{exp.role}</h3>
+                       <div className="text-slate-500 font-black text-[10px] uppercase tracking-widest mb-8">{exp.company}</div>
+                       <ul className="space-y-4">
+                          {exp.description.map((desc, dIdx) => (
+                             <li key={dIdx} className="text-slate-400 text-base leading-relaxed flex items-start gap-4">
+                                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-slate-700 flex-shrink-0" />
+                                {desc}
+                             </li>
+                          ))}
+                       </ul>
+                    </motion.div>
+                 ))}
+              </div>
+
+              <div id="skills" className="no-print">
+                 <div className="sticky top-32 space-y-12">
+                    <div>
+                       <h3 className="text-2xl font-black text-white tracking-tighter uppercase mb-10 flex items-center gap-4">
+                          <Database size={24} className="text-sky-500" /> Proficiency
+                       </h3>
+                       <div className="space-y-8">
+                          {RESUME_DATA.skills.map((skill, i) => (
+                             <div key={i} className="space-y-3">
+                                <div className="flex justify-between font-black uppercase text-[10px] tracking-widest text-slate-500">
+                                   <span>{skill.name}</span>
+                                   <span className="text-sky-500">{skill.level}%</span>
+                                </div>
+                                <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                   <motion.div initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }} className="h-full bg-sky-600" />
+                                </div>
+                             </div>
+                          ))}
+                       </div>
+                    </div>
+
+                    <div className="p-10 bg-sky-600 rounded-[2rem] shadow-4xl group">
+                       <h4 className="text-white text-2xl font-black mb-4 tracking-tighter">Full Vitae.</h4>
+                       <p className="text-sky-100 text-sm font-medium mb-10">Download the comprehensive verified industrial record.</p>
+                       <a 
+                         href={RESUME_DATA.resume_url} 
+                         target="_blank" 
+                         rel="noopener noreferrer"
+                         className="inline-flex items-center gap-4 bg-white text-slate-950 px-8 py-4 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl hover:bg-slate-950 hover:text-white transition-all w-full justify-center"
+                       >
+                         Download Record <Download size={16} />
+                       </a>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </section>
+
+        {/* EDUCATION & CONTACT FOOTER */}
+        <section id="education" className="py-32 px-6 max-w-7xl mx-auto border-t border-white/5 no-print">
+            <div className="flex flex-col md:flex-row gap-20">
+               <div className="md:w-1/3">
+                  <h2 className="text-4xl md:text-6xl font-black font-heading text-white mb-6 uppercase tracking-tighter">Formal <br />Record.</h2>
+               </div>
+               <div className="md:w-2/3 grid sm:grid-cols-2 gap-6">
+                  {RESUME_DATA.education.map((edu, i) => (
+                     <div key={i} className="p-10 bg-slate-900 border border-white/5 rounded-3xl">
+                        <div className="text-sky-500 font-black text-xs mb-4">{edu.year}</div>
+                        <h3 className="text-lg font-black text-white uppercase tracking-tight mb-2 leading-tight">{edu.degree}</h3>
+                        <div className="text-slate-600 text-[10px] font-black uppercase tracking-widest">{edu.institution}</div>
+                        {edu.percentage && <div className="mt-6 inline-block px-4 py-1.5 bg-sky-500/10 text-sky-400 font-black text-[10px] rounded-lg border border-sky-500/20">{edu.percentage} %</div>}
+                     </div>
+                  ))}
+               </div>
+            </div>
+        </section>
+
+        <footer id="contact" className="py-32 px-6 border-t border-white/5 bg-slate-950 no-print">
+           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-20">
+              <div className="max-w-xl">
+                 <h2 className="text-7xl md:text-9xl font-black font-heading text-white tracking-tighter mb-10 opacity-20">Contact.</h2>
+                 <div className="grid gap-10">
+                    <div className="flex items-center gap-6">
+                       <div className="w-16 h-16 bg-slate-900 rounded-3xl flex items-center justify-center text-sky-500 border border-white/5"><Mail size={24} /></div>
+                       <div>
+                          <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-1">Electronic Mail</p>
+                          <p className="text-white text-xl font-bold">{RESUME_DATA.email}</p>
+                       </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                       <div className="w-16 h-16 bg-slate-900 rounded-3xl flex items-center justify-center text-sky-500 border border-white/5"><Phone size={24} /></div>
+                       <div>
+                          <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-1">Direct Line</p>
+                          <p className="text-white text-xl font-bold">{RESUME_DATA.phone}</p>
+                       </div>
+                    </div>
+                    <div className="flex items-center gap-6">
+                       <div className="w-16 h-16 bg-slate-900 rounded-3xl flex items-center justify-center text-sky-500 border border-white/5"><MapPin size={24} /></div>
+                       <div>
+                          <p className="text-[10px] font-black text-slate-600 uppercase tracking-widest mb-1">Base Location</p>
+                          <p className="text-white text-xl font-bold tracking-tight">{RESUME_DATA.address}</p>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+
+              <div className="flex flex-col justify-end text-right">
+                 <div className="p-8 bg-slate-900 border border-white/5 rounded-3xl mb-12">
+                    <p className="text-slate-400 font-medium mb-6 leading-relaxed">Available for strategic managerial and technical roles in Tier-1 environments globally.</p>
+                    <button onClick={() => window.print()} className="w-full flex items-center justify-center gap-4 bg-sky-600 text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest hover:bg-sky-500 transition-all">Print Official Bio <Printer size={18} /></button>
+                 </div>
+                 <p className="text-slate-800 text-4xl font-black uppercase tracking-tighter leading-none">{RESUME_DATA.name}</p>
+                 <p className="text-slate-800 text-[10px] font-black uppercase tracking-[0.5em] mt-2">Industrial Operations Specialist</p>
+              </div>
+           </div>
+        </footer>
       </main>
-
-      <footer className="py-12 md:py-20 border-t border-white/5 px-6 no-print">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
-          <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
-             <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center font-black text-white">JP</div>
-             <p className="text-gray-500 text-xs md:text-sm font-medium tracking-tight">© 2025 Jashvantbhai Parmar. Industrial Excellence Portfolio.</p>
-          </div>
-          <div className="flex items-center gap-6 md:gap-12 text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">
-             <span className="hover:text-amber-500 cursor-pointer transition-colors">Docs</span>
-             <span className="hover:text-amber-500 cursor-pointer transition-colors">Legal</span>
-             <span className="hover:text-amber-500 cursor-pointer transition-colors">V1.0.0</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
