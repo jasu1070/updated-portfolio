@@ -99,78 +99,77 @@ const App: React.FC = () => {
     <div className="relative min-h-screen bg-slate-50 text-slate-900 selection:bg-sky-500/20">
       <Background />
 
+      {/* Precision Progress Rail */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-sky-600 origin-left z-[100] no-print"
+        className="fixed top-0 left-0 right-0 h-[2px] bg-sky-500 origin-left z-[101] no-print shadow-[0_0_10px_rgba(14,165,233,0.5)]"
         style={{ scaleX }}
       />
 
-      <nav className="fixed top-6 left-0 w-full z-50 px-6 no-print pointer-events-none">
-        <div className="max-w-7xl mx-auto flex justify-center">
-          <motion.div 
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="pointer-events-auto backdrop-blur-md bg-white/70 border border-slate-200/50 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.05)] px-4 md:px-8 h-16 md:h-20 flex items-center gap-6 md:gap-12"
-          >
-            <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => scrollTo('hero')}>
-              <div className="w-8 h-8 md:w-10 md:h-10 bg-sky-600 rounded-lg flex items-center justify-center font-black text-white text-sm border border-sky-400">JP</div>
-              <div className="hidden xs:block">
-                <div className="text-slate-900 font-black text-[10px] md:text-xs uppercase tracking-tighter leading-none">Jashvant Parmar</div>
-                <div className="text-sky-600 text-[8px] font-black uppercase tracking-widest mt-0.5">Ops Expert</div>
+      <nav className="fixed top-0 left-0 w-full z-50 no-print transition-all duration-300">
+        <div className="bg-slate-50/80 backdrop-blur-md border-b border-slate-200/50 h-16 md:h-20 flex items-center">
+          <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
+            {/* System Identity */}
+            <div className="flex items-center gap-4 cursor-pointer group" onClick={() => scrollTo('hero')}>
+              <div className="font-mono text-[9px] font-black tracking-[0.4em] text-slate-900 flex items-center gap-3">
+                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
+                SYSTEM.JP // {DATA.name.split(' ')[0].toUpperCase()}
               </div>
             </div>
 
-            <div className="h-6 w-[1px] bg-slate-200 hidden md:block" />
-
-            <div className="hidden lg:flex items-center gap-8">
+            {/* Precision Rail Links */}
+            <div className="hidden lg:flex items-center gap-12">
               {sections.map((section) => (
                 <button
                   key={section.id}
                   onClick={() => scrollTo(section.id)}
-                  className={`relative text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:text-sky-600 py-2 group ${
-                    activeSection === section.id ? 'text-sky-700' : 'text-slate-500'
+                  className={`font-mono text-[9px] font-bold uppercase tracking-[0.3em] transition-all hover:text-sky-600 relative py-1 ${
+                    activeSection === section.id ? 'text-sky-600' : 'text-slate-400'
                   }`}
                 >
                   {section.label}
                   {activeSection === section.id && (
-                    <motion.div 
-                      layoutId="navTab"
-                      className="absolute -bottom-1 left-0 right-0 h-0.5 bg-sky-600 rounded-full" 
+                    <motion.span 
+                      layoutId="activeRail"
+                      className="absolute -bottom-[26px] left-0 right-0 h-[3px] bg-sky-500 rounded-t-full"
                     />
                   )}
                 </button>
               ))}
             </div>
 
-            <div className="flex items-center gap-4">
+            {/* Ops Actions */}
+            <div className="flex items-center gap-6">
               <button 
                 onClick={() => window.print()}
-                className="hidden sm:block px-5 py-2 bg-slate-900 text-white font-black rounded-full text-[9px] uppercase tracking-widest hover:bg-sky-600 transition-all shadow-md active:scale-95"
+                className="hidden sm:block font-mono text-[9px] font-black text-slate-900 border border-slate-900 px-4 py-2 hover:bg-slate-900 hover:text-white transition-all uppercase tracking-widest"
               >
-                Print CV
+                Execute_Print
               </button>
 
-              <button className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 bg-slate-50 rounded-full border border-slate-200" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+              <button className="lg:hidden p-2 text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
                 {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             </div>
-          </motion.div>
+          </div>
         </div>
 
+        {/* Command Center Overlay */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: -20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className="lg:hidden absolute top-24 left-6 right-6 bg-white/90 backdrop-blur-2xl rounded-[2rem] border border-slate-200 shadow-2xl overflow-hidden pointer-events-auto"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="lg:hidden absolute top-full left-0 w-full bg-slate-50/95 backdrop-blur-2xl border-b border-slate-200 shadow-2xl overflow-hidden"
             >
-              <div className="p-8 space-y-4">
+              <div className="p-8 grid gap-4">
+                <div className="font-mono text-[8px] text-slate-400 uppercase tracking-widest mb-2 px-4">Navigation_Matrix</div>
                 {sections.map((section) => (
                   <button
                     key={section.id}
                     onClick={() => scrollTo(section.id)}
-                    className={`block w-full text-center py-4 rounded-2xl text-lg font-black uppercase tracking-tighter transition-colors ${
-                      activeSection === section.id ? 'bg-sky-50 text-sky-600' : 'text-slate-900 active:bg-slate-50'
+                    className={`block w-full text-left px-6 py-4 rounded-xl font-mono text-xs font-black uppercase tracking-[0.2em] transition-all ${
+                      activeSection === section.id ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/20' : 'text-slate-600 hover:bg-slate-100'
                     }`}
                   >
                     {section.label}
@@ -178,9 +177,9 @@ const App: React.FC = () => {
                 ))}
                 <button 
                   onClick={() => window.print()}
-                  className="w-full py-5 bg-slate-950 text-white font-black rounded-2xl text-[10px] uppercase tracking-[0.3em] mt-4"
+                  className="w-full py-5 bg-slate-900 text-white font-mono text-[9px] font-black uppercase tracking-[0.4em] mt-6 rounded-xl"
                 >
-                  Print Official Record
+                  SYSTEM_DUMP (PRINT)
                 </button>
               </div>
             </motion.div>
