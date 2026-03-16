@@ -86,17 +86,17 @@ const App: React.FC = () => {
       />
 
       <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-black/60 border-b border-white/5 no-print">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-3 cursor-pointer"
+            className="flex items-center gap-2 md:gap-3 cursor-pointer"
             onClick={() => scrollTo('hero')}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center font-black text-xl text-black shadow-lg shadow-amber-500/20">
+            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg md:rounded-xl flex items-center justify-center font-black text-lg md:text-xl text-black shadow-lg shadow-amber-500/20">
               JP
             </div>
-            <span className="font-heading text-lg font-bold tracking-tight hidden sm:block uppercase">
+            <span className="font-heading text-base md:text-lg font-bold tracking-tight hidden sm:block uppercase">
               {RESUME_DATA.name.split(' ')[0]}
             </span>
           </motion.div>
@@ -138,8 +138,8 @@ const App: React.FC = () => {
             </motion.button>
           </div>
 
-          <button className="md:hidden text-white p-2" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          <button className="md:hidden text-white p-2 hover:bg-white/5 rounded-lg transition-colors" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
@@ -200,7 +200,7 @@ const App: React.FC = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, type: 'spring' }}
-              className="font-heading text-6xl md:text-9xl font-black mb-8 tracking-tighter leading-[0.9]"
+              className="font-heading text-5xl sm:text-7xl md:text-9xl font-black mb-6 md:mb-8 tracking-tighter leading-[0.9] px-2"
             >
               {RESUME_DATA.name.split(' ')[1]} <br /> 
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-orange-500 to-amber-400 animate-gradient">
@@ -212,7 +212,7 @@ const App: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto mb-12 font-light tracking-tight leading-relaxed"
+              className="text-gray-400 text-base md:text-2xl max-w-2xl mx-auto mb-10 md:mb-12 font-light tracking-tight leading-relaxed px-4"
             >
               Production Supervisor & Machine Operations Specialist with <span className="text-white font-bold">9+ years</span> of precision-focused excellence in tier-1 manufacturing.
             </motion.p>
@@ -258,17 +258,17 @@ const App: React.FC = () => {
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="lg:col-span-5 relative sticky top-32"
+              className="lg:col-span-5 relative lg:sticky top-32"
             >
-              <div className="aspect-[4/5] bg-white/5 border border-white/10 rounded-[2.5rem] overflow-hidden group shadow-2xl">
+              <div className="aspect-[4/5] sm:aspect-[4/5] bg-white/5 border border-white/10 rounded-3xl md:rounded-[2.5rem] overflow-hidden group shadow-2xl">
                 <img 
                   src={RESUME_DATA.profile_image} 
                   alt="Industrial Professional" 
-                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-1000 scale-105 group-hover:scale-100"
+                  className="absolute inset-0 w-full h-full object-cover grayscale md:opacity-40 group-hover:grayscale-0 group-hover:opacity-70 transition-all duration-1000 scale-105 group-hover:scale-100"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-                <div className="absolute bottom-0 left-0 p-10 w-full">
-                  <h3 className="text-4xl font-black font-heading mb-3 tracking-tighter">TECHNICAL CORE</h3>
+                <div className="absolute bottom-0 left-0 p-6 md:p-10 w-full">
+                  <h3 className="text-2xl md:text-4xl font-black font-heading mb-3 tracking-tighter">TECHNICAL CORE</h3>
                   <div className="flex flex-wrap gap-2">
                     {["CNC", "QUALITY", "OPERATIONS"].map(t => (
                       <span key={t} className="px-3 py-1 bg-amber-500/20 text-amber-500 text-[10px] font-black rounded-lg border border-amber-500/20">{t}</span>
@@ -288,27 +288,27 @@ const App: React.FC = () => {
                 <div className="w-8 h-[2px] bg-amber-500" />
                 <span className="uppercase tracking-[0.2em] text-xs font-black">Introduction</span>
               </div>
-              <h2 className="text-5xl md:text-7xl font-black font-heading mb-10 leading-[0.95] tracking-tighter">
+              <h2 className="text-4xl md:text-7xl font-black font-heading mb-6 md:mb-10 leading-[0.95] tracking-tighter">
                 Precision & <br /><span className="text-gray-600">Performance.</span>
               </h2>
-              <p className="text-gray-400 text-xl leading-relaxed mb-12 font-light">
+              <p className="text-gray-400 text-base md:text-xl leading-relaxed mb-8 md:mb-12 font-light">
                 {RESUME_DATA.objective}
               </p>
               
               <div className="grid sm:grid-cols-2 gap-8">
-                <div className="group p-8 bg-white/5 border border-white/10 rounded-3xl hover:border-amber-500/30 transition-all">
-                   <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform">
-                      <MapPin size={24} />
+                <div className="group p-6 md:p-8 bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl hover:border-amber-500/30 transition-all">
+                   <div className="w-10 h-10 md:w-12 md:h-12 bg-amber-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-amber-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                      <MapPin size={20} />
                    </div>
-                   <h4 className="text-white font-black text-sm uppercase tracking-widest mb-2">Based in</h4>
-                   <p className="text-gray-400 font-medium">{RESUME_DATA.address}</p>
+                   <h4 className="text-white font-black text-xs uppercase tracking-widest mb-2">Based in</h4>
+                   <p className="text-gray-400 font-medium text-sm md:text-base">{RESUME_DATA.address}</p>
                 </div>
-                <div className="group p-8 bg-white/5 border border-white/10 rounded-3xl hover:border-amber-500/30 transition-all">
-                   <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center text-amber-500 mb-6 group-hover:scale-110 transition-transform">
-                      <Briefcase size={24} />
+                <div className="group p-6 md:p-8 bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl hover:border-amber-500/30 transition-all">
+                   <div className="w-10 h-10 md:w-12 md:h-12 bg-amber-500/10 rounded-xl md:rounded-2xl flex items-center justify-center text-amber-500 mb-4 md:mb-6 group-hover:scale-110 transition-transform">
+                      <Briefcase size={20} />
                    </div>
-                   <h4 className="text-white font-black text-sm uppercase tracking-widest mb-2">Track Record</h4>
-                   <p className="text-gray-400 font-medium">9+ Years of Field Expertise</p>
+                   <h4 className="text-white font-black text-xs uppercase tracking-widest mb-2">Track Record</h4>
+                   <p className="text-gray-400 font-medium text-sm md:text-base">9+ Years of Field Expertise</p>
                 </div>
               </div>
             </motion.div>
@@ -323,7 +323,7 @@ const App: React.FC = () => {
                   <div className="w-8 h-[2px] bg-amber-500" />
                   <span className="uppercase tracking-[0.2em] text-xs font-black">History</span>
                 </div>
-                <h2 className="text-5xl md:text-8xl font-black font-heading tracking-tighter leading-none">Career Path</h2>
+                <h2 className="text-4xl md:text-8xl font-black font-heading tracking-tighter leading-none">Career Path</h2>
               </div>
               <div className="text-gray-500 font-black text-sm uppercase tracking-widest hidden md:block no-print">
                 2016 — PRESENT
@@ -345,7 +345,7 @@ const App: React.FC = () => {
                 <div className="w-8 h-[2px] bg-amber-500" />
                 <span className="uppercase tracking-[0.2em] text-xs font-black">Capabilities</span>
               </div>
-              <h2 className="text-5xl md:text-7xl font-black font-heading mb-10 tracking-tighter leading-[0.95]">
+              <h2 className="text-4xl md:text-7xl font-black font-heading mb-6 md:mb-10 tracking-tighter leading-[0.95]">
                 Technical <br /> Mastery.
               </h2>
               <p className="text-gray-400 text-lg mb-12 font-light leading-relaxed">
@@ -370,9 +370,9 @@ const App: React.FC = () => {
 
         <section id="education" className="py-32 px-6 bg-white/[0.02]">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-24">
-              <h2 className="text-5xl md:text-8xl font-black font-heading tracking-tighter mb-4">Qualifications</h2>
-              <p className="text-gray-500 uppercase tracking-[0.4em] font-black text-xs">Foundation of knowledge</p>
+            <div className="text-center mb-16 md:mb-24">
+              <h2 className="text-4xl md:text-8xl font-black font-heading tracking-tighter mb-4">Qualifications</h2>
+              <p className="text-gray-500 uppercase tracking-[0.4em] font-black text-[10px] md:text-xs">Foundation of knowledge</p>
             </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {RESUME_DATA.education.map((edu, idx) => (
@@ -382,40 +382,38 @@ const App: React.FC = () => {
           </div>
         </section>
 
-        <section id="contact" className="py-32 px-6 max-w-7xl mx-auto no-print">
-          <div className="bg-gradient-to-br from-amber-500 via-orange-600 to-amber-700 rounded-[3.5rem] p-12 md:p-24 relative overflow-hidden shadow-2xl shadow-amber-500/20">
+        <section id="contact" className="py-20 md:py-32 px-4 md:px-6 max-w-7xl mx-auto no-print">
+          <div className="bg-gradient-to-br from-amber-500 via-orange-600 to-amber-700 rounded-3xl md:rounded-[3.5rem] p-8 md:p-24 relative overflow-hidden shadow-2xl shadow-amber-500/20">
              <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
              
              <div className="relative z-10 grid lg:grid-cols-2 gap-20 items-center">
                <div>
-                  <h2 className="text-5xl md:text-8xl font-black font-heading mb-10 text-black leading-[0.9] tracking-tighter">Get in <br /> Touch.</h2>
-                  
-                  <div className="space-y-10">
-                    <a href={`mailto:${RESUME_DATA.email}`} className="flex items-center gap-6 group">
-                      <div className="w-16 h-16 bg-black rounded-3xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
-                        <Mail size={32} />
+               <div className="space-y-6 md:space-y-10">
+                    <a href={`mailto:${RESUME_DATA.email}`} className="flex items-center gap-4 md:gap-6 group">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-black rounded-2xl md:rounded-3xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+                        <Mail size={24} md:size={32} />
                       </div>
                       <div>
-                        <p className="text-black/60 text-xs uppercase tracking-widest font-black mb-1">Email</p>
-                        <p className="text-black text-2xl font-black tracking-tight underline decoration-2 underline-offset-4">{RESUME_DATA.email}</p>
+                        <p className="text-black/60 text-[10px] uppercase tracking-widest font-black mb-1">Email</p>
+                        <p className="text-black text-lg md:text-2xl font-black tracking-tight underline decoration-2 underline-offset-4 break-all md:break-normal">{RESUME_DATA.email}</p>
                       </div>
                     </a>
                     
-                    <a href={`tel:${RESUME_DATA.phone}`} className="flex items-center gap-6 group">
-                      <div className="w-16 h-16 bg-black rounded-3xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
-                        <Phone size={32} />
+                    <a href={`tel:${RESUME_DATA.phone}`} className="flex items-center gap-4 md:gap-6 group">
+                      <div className="w-12 h-12 md:w-16 md:h-16 bg-black rounded-2xl md:rounded-3xl flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+                        <Phone size={24} md:size={32} />
                       </div>
                       <div>
-                        <p className="text-black/60 text-xs uppercase tracking-widest font-black mb-1">Phone</p>
-                        <p className="text-black text-2xl font-black tracking-tight">{RESUME_DATA.phone}</p>
+                        <p className="text-black/60 text-[10px] uppercase tracking-widest font-black mb-1">Phone</p>
+                        <p className="text-black text-lg md:text-2xl font-black tracking-tight">{RESUME_DATA.phone}</p>
                       </div>
                     </a>
                   </div>
                </div>
                
-               <div className="bg-black/20 backdrop-blur-3xl border border-white/20 p-10 rounded-[2.5rem] shadow-xl">
-                 <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-                   <div className="grid sm:grid-cols-2 gap-6">
+               <div className="bg-black/20 backdrop-blur-3xl border border-white/20 p-6 md:p-10 rounded-3xl md:rounded-[2.5rem] shadow-xl">
+                 <form className="space-y-6 md:space-y-8" onSubmit={(e) => e.preventDefault()}>
+                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                      <div>
                        <label className="block text-[10px] uppercase text-white/60 mb-3 font-black tracking-widest">Name</label>
                        <input className="w-full bg-white/10 border border-white/20 rounded-2xl px-6 py-4 outline-none focus:border-white transition-all text-white placeholder:text-white/30" placeholder="Full Name" />
@@ -439,14 +437,14 @@ const App: React.FC = () => {
         </section>
       </main>
 
-      <footer className="py-20 border-t border-white/5 px-6 no-print">
-        <div className="max-w-7xl mx-auto flex flex-col md:row items-center justify-between gap-10">
-          <div className="flex items-center gap-4">
+      <footer className="py-12 md:py-20 border-t border-white/5 px-6 no-print">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
+          <div className="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
              <div className="w-10 h-10 bg-white/5 rounded-xl flex items-center justify-center font-black text-white">JP</div>
-             <p className="text-gray-500 text-sm font-medium tracking-tight">© 2025 Jashvantbhai Parmar. Industrial Excellence Portfolio.</p>
+             <p className="text-gray-500 text-xs md:text-sm font-medium tracking-tight">© 2025 Jashvantbhai Parmar. Industrial Excellence Portfolio.</p>
           </div>
-          <div className="flex items-center gap-12 text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">
-             <span className="hover:text-amber-500 cursor-pointer transition-colors">Documentation</span>
+          <div className="flex items-center gap-6 md:gap-12 text-gray-600 text-[10px] uppercase tracking-[0.3em] font-black">
+             <span className="hover:text-amber-500 cursor-pointer transition-colors">Docs</span>
              <span className="hover:text-amber-500 cursor-pointer transition-colors">Legal</span>
              <span className="hover:text-amber-500 cursor-pointer transition-colors">V1.0.0</span>
           </div>
