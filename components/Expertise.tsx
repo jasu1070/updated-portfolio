@@ -47,26 +47,26 @@ const Expertise: React.FC<ExpertiseProps> = ({ DATA }) => {
              </div>
 
              <div className="grid grid-cols-2 gap-6 no-print">
-                <motion.div initial={{ y: 0 }} animate={{ y: [0, -20, 0] }} transition={{ duration: 6, repeat: Infinity }} className="space-y-6">
+                <div className="space-y-6 animate-float-y">
                    <div className="aspect-[4/5] bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl relative group border border-white/5">
-                       <img src={DATA.images.cnc} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="CNC Operations" loading="lazy" />
+                       <img src={DATA.images.cnc} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="CNC Operations" loading="lazy" decoding="async" />
                       <div className="absolute inset-0 bg-sky-600/10" />
                    </div>
                    <div className="p-8 bg-white border border-slate-200 rounded-[2rem] shadow-xl">
                       <div className="text-sky-600 font-black text-3xl mb-2">98%</div>
                       <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">UPTIME LOGGED</div>
                    </div>
-                </motion.div>
-                <motion.div initial={{ y: 0 }} animate={{ y: [0, 20, 0] }} transition={{ duration: 7, repeat: Infinity }} className="pt-20 space-y-6">
+                </div>
+                <div className="pt-20 space-y-6 animate-float-y-reverse">
                    <div className="p-8 bg-sky-600 border border-sky-500 rounded-[2rem] shadow-xl text-white">
                       <div className="text-white font-black text-3xl mb-2">0.0</div>
                       <div className="text-[10px] font-black text-sky-200 uppercase tracking-widest leading-none">MAJOR INCIDENTS</div>
                    </div>
                     <div className="aspect-[4/5] bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl relative group border border-white/5">
-                       <img src={DATA.images.quality} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="QC Standard" loading="lazy" />
+                       <img src={DATA.images.quality} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="QC Standard" loading="lazy" decoding="async" />
                        <div className="absolute inset-0 bg-emerald-600/10" />
                     </div>
-                 </motion.div>
+                 </div>
               </div>
 
               {/* KEY STRENGTHS: THE PROFESSIONAL DNA */}

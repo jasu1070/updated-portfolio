@@ -30,6 +30,7 @@ const BottomTabs: React.FC<BottomTabsProps> = ({ activeSection, scrollTo }) => {
             <button
               key={tab.id}
               onClick={() => scrollTo(tab.id)}
+              aria-label={`Navigate to ${tab.label}`}
               className="relative flex flex-col items-center justify-center flex-1 py-2 gap-1"
             >
               {isActive && (

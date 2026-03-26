@@ -16,8 +16,8 @@ const ContactSection: React.FC<ContactSectionProps> = ({ DATA }) => {
                 <h2 className="text-4xl md:text-[12rem] font-black font-heading text-white tracking-tighter mb-10 md:mb-16 opacity-10 uppercase">Connect.</h2>
                 <div className="grid gap-6 md:gap-12">
                    {[
-                     { icon: <Mail size={20} />, label: "Corporate Email", value: DATA.email },
-                     { icon: <Phone size={20} />, label: "Direct Phone", value: DATA.phone },
+                     { icon: <Mail size={20} />, label: "Corporate Email", value: DATA.email, href: `mailto:${DATA.email}` },
+                     { icon: <Phone size={20} />, label: "Direct Phone", value: DATA.phone, href: `tel:${DATA.phone}` },
                      { icon: <MapPin size={20} />, label: "Operational Base", value: DATA.address }
                    ].map((link, lIdx) => (
                      <div key={lIdx} className="flex items-start gap-5 md:gap-10 group cursor-default">
@@ -26,7 +26,13 @@ const ContactSection: React.FC<ContactSectionProps> = ({ DATA }) => {
                         </div>
                         <div className="min-w-0 flex-1">
                            <p className="text-[8px] md:text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-1 md:mb-2">{link.label}</p>
-                           <p className="text-white text-base md:text-3xl font-bold tracking-tight break-words">{link.value}</p>
+                           {link.href ? (
+                             <a href={link.href} className="text-white text-base md:text-3xl font-bold tracking-tight break-words hover:text-sky-500 transition-colors">
+                               {link.value}
+                             </a>
+                           ) : (
+                             <p className="text-white text-base md:text-3xl font-bold tracking-tight break-words">{link.value}</p>
+                           )}
                         </div>
                      </div>
                    ))}

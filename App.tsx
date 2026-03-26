@@ -4,7 +4,14 @@ import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
 import {
   Menu,
   X,
-  ArrowRight
+  ArrowRight,
+  Home,
+  LayoutGrid,
+  Zap,
+  User,
+  Briefcase,
+  GraduationCap,
+  MessageSquare
 } from 'lucide-react';
 import { RESUME_DATA } from './constants';
 import { ResumeData } from './types';
@@ -19,6 +26,8 @@ const About = lazy(() => import('./components/About'));
 const ExperienceSection = lazy(() => import('./components/ExperienceSection'));
 const EducationSection = lazy(() => import('./components/EducationSection'));
 const ContactSection = lazy(() => import('./components/ContactSection'));
+
+import Navbar from './components/Navbar';
 
 const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState('hero');
@@ -51,34 +60,42 @@ const App: React.FC = () => {
   } as ResumeData;
 
   const sections = [
-    { id: 'hero', label: 'Home' },
-    { id: 'gallery', label: 'Showcase' },
-    { id: 'pillars', label: 'Expertise' },
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'education', label: 'Education' },
-    { id: 'contact', label: 'Contact' },
+    { id: 'hero', label: 'Home', icon: <Home size={18} /> },
+    { id: 'gallery', label: 'Showcase', icon: <LayoutGrid size={18} /> },
+    { id: 'pillars', label: 'Expertise', icon: <Zap size={18} /> },
+    { id: 'about', label: 'About', icon: <User size={18} /> },
+    { id: 'experience', label: 'Career', icon: <Briefcase size={18} /> },
+    { id: 'education', label: 'Edu', icon: <GraduationCap size={18} /> },
+    { id: 'contact', label: 'Contact', icon: <MessageSquare size={18} /> },
   ];
 
-  const handleScroll = useCallback(() => {
-    const sectionElements = sections.map(s => document.getElementById(s.id));
-    const scrollPosition = window.scrollY + 120;
-
-    sectionElements.forEach((el, idx) => {
-      if (el && scrollPosition >= el.offsetTop && scrollPosition < el.offsetTop + el.offsetHeight) {
-        setActiveSection(sections[idx].id);
-      }
-    });
-  }, []);
-
   useEffect(() => {
-    const handleScrollEvent = () => {
-      handleScroll();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.5, rootMargin: '-80px 0px -20% 0px' }
+    );
+
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (el) observer.observe(el);
+    });
+
+    const handleScrollProgress = () => {
       setShowScrollTop(window.scrollY > 1000);
     };
-    window.addEventListener('scroll', handleScrollEvent);
-    return () => window.removeEventListener('scroll', handleScrollEvent);
-  }, [handleScroll]);
+    window.addEventListener('scroll', handleScrollProgress, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScrollProgress);
+    };
+  }, []);
 
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
@@ -105,87 +122,51 @@ const App: React.FC = () => {
         style={{ scaleX }}
       />
 
-      <nav className="fixed top-0 left-0 w-full z-50 no-print transition-all duration-300">
-        <div className="bg-slate-50/80 backdrop-blur-md border-b border-slate-200/50 h-16 md:h-20 flex items-center">
-          <div className="max-w-7xl mx-auto px-6 w-full flex items-center justify-between">
-            {/* System Identity */}
-            <div className="flex items-center gap-4 cursor-pointer group" onClick={() => scrollTo('hero')}>
-              <div className="font-mono text-[9px] font-black tracking-[0.4em] text-slate-900 flex items-center gap-3">
-                <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" />
-                SYSTEM.JP // {DATA.name.split(' ')[0].toUpperCase()}
-              </div>
-            </div>
+      <Navbar 
+        DATA={DATA} 
+        activeSection={activeSection} 
+        scrollTo={scrollTo} 
+        isMenuOpen={isMenuOpen} 
+        setIsMenuOpen={setIsMenuOpen} 
+      />
 
-            {/* Precision Rail Links */}
-            <div className="hidden lg:flex items-center gap-12">
+      {/* Precision Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="lg:hidden fixed top-16 md:top-20 left-0 w-full bg-white z-[60] shadow-2xl border-b border-slate-200"
+          >
+            <div className="flex flex-col p-4">
               {sections.map((section) => (
                 <button
                   key={section.id}
-                  onClick={() => scrollTo(section.id)}
-                  className={`font-mono text-[9px] font-bold uppercase tracking-[0.3em] transition-all hover:text-sky-600 relative py-1 ${
-                    activeSection === section.id ? 'text-sky-600' : 'text-slate-400'
+                  onClick={() => {
+                    scrollTo(section.id);
+                    setIsMenuOpen(false);
+                  }}
+                  className={`w-full text-left px-6 py-4 font-mono text-xs font-black tracking-[0.2em] uppercase transition-all ${
+                    activeSection === section.id ? 'text-sky-600 bg-slate-50' : 'text-slate-600'
                   }`}
                 >
                   {section.label}
-                  {activeSection === section.id && (
-                    <motion.span 
-                      layoutId="activeRail"
-                      className="absolute -bottom-[26px] left-0 right-0 h-[3px] bg-sky-500 rounded-t-full"
-                    />
-                  )}
                 </button>
               ))}
-            </div>
-
-            {/* Ops Actions */}
-            <div className="flex items-center gap-6">
-              <button 
-                onClick={() => window.print()}
-                className="hidden sm:block font-mono text-[9px] font-black text-slate-900 border border-slate-900 px-4 py-2 hover:bg-slate-900 hover:text-white transition-all uppercase tracking-widest"
-              >
-                Execute_Print
-              </button>
-
-              <button className="lg:hidden p-2 text-slate-900" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Command Center Overlay */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="lg:hidden absolute top-full left-0 w-full bg-slate-50/95 backdrop-blur-2xl border-b border-slate-200 shadow-2xl overflow-hidden"
-            >
-              <div className="p-8 grid gap-4">
-                <div className="font-mono text-[8px] text-slate-400 uppercase tracking-widest mb-2 px-4">Navigation_Matrix</div>
-                {sections.map((section) => (
-                  <button
-                    key={section.id}
-                    onClick={() => scrollTo(section.id)}
-                    className={`block w-full text-left px-6 py-4 rounded-xl font-mono text-xs font-black uppercase tracking-[0.2em] transition-all ${
-                      activeSection === section.id ? 'bg-sky-500 text-white shadow-lg shadow-sky-500/20' : 'text-slate-600 hover:bg-slate-100'
-                    }`}
-                  >
-                    {section.label}
-                  </button>
-                ))}
+              <div className="p-4 mt-2">
                 <button 
                   onClick={() => window.print()}
-                  className="w-full py-5 bg-slate-900 text-white font-mono text-[9px] font-black uppercase tracking-[0.4em] mt-6 rounded-xl"
+                  className="w-full py-4 bg-slate-900 text-white font-mono text-[10px] font-black uppercase tracking-[0.3em] rounded-sm shadow-lg active:scale-[0.98] transition-all"
                 >
                   SYSTEM_DUMP (PRINT)
                 </button>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      <div className="h-16 md:h-20" /> {/* Spacer for fixed nav */}
 
       <main>
         <Suspense fallback={<LoadingScreen />}>
@@ -206,9 +187,10 @@ const App: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             onClick={() => scrollTo('hero')}
+            aria-label="Scroll to top"
             className="fixed bottom-10 right-10 w-14 h-14 bg-sky-600 text-white rounded-full flex items-center justify-center shadow-2xl shadow-sky-600/40 z-[90] hover:bg-sky-500 transition-all border border-white/20 no-print group"
           >
-            <ArrowRight size={24} className="-rotate-90 group-hover:-translate-y-1 transition-transform" />
+            <ArrowRight size={24} aria-hidden="true" className="-rotate-90 group-hover:-translate-y-1 transition-transform" />
           </motion.button>
         )}
       </AnimatePresence>

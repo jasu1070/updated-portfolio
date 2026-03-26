@@ -13,12 +13,9 @@ const Hero: React.FC<HeroProps> = ({ DATA, scrollTo }) => {
   return (
     <section id="hero" className="relative min-h-[90vh] md:min-h-screen flex items-center justify-center pt-32 pb-20 md:pt-24">
       <div className="absolute inset-0 -z-10 bg-slate-50 no-print">
-        <motion.img 
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.15 }}
-          transition={{ duration: 20 }}
+        <img 
           src={DATA.images.factory} 
-          className="w-full h-full object-cover grayscale mix-blend-multiply" 
+          className="w-full h-full object-cover grayscale mix-blend-multiply animate-subtle-zoom" 
           alt="Industrial Production Flow" 
           loading="eager"
         />

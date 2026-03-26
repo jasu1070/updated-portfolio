@@ -24,7 +24,7 @@ const BentoGallery: React.FC<BentoGalleryProps> = ({ DATA }) => {
                whileInView={{ opacity: 1, scale: 1 }}
                 className="md:col-span-2 md:row-span-2 relative group rounded-3xl overflow-hidden border border-slate-200 bg-white shadow-xl"
               >
-                 <img src={DATA.images.factory} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Factory Floor" loading="lazy" />
+                 <img src={DATA.images.factory} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="Factory Floor" loading="lazy" decoding="async" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-60" />
                 <div className="absolute bottom-8 left-8">
                    <div className="text-sky-500 font-black text-[10px] tracking-[0.4em] mb-2 uppercase">Core Facility</div>

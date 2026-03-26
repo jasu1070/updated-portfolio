@@ -13,7 +13,7 @@ const About: React.FC<AboutProps> = ({ DATA }) => {
        <div className="grid lg:grid-cols-12 gap-24 items-center">
           <div className="lg:col-span-5">
               <div className="relative p-4 bg-white border border-slate-200 rounded-[3rem] shadow-4xl group">
-                 <img src={DATA.profile_image} className="w-full h-auto rounded-[2.5rem] grayscale contrast-125 filter group-hover:grayscale-0 transition-all duration-1000" alt="Professional Portrait" loading="lazy" />
+                 <img src={DATA.profile_image} className="w-full h-auto rounded-[2.5rem] grayscale contrast-125 filter group-hover:grayscale-0 transition-all duration-1000" alt={`Professional portrait of ${DATA.name}`} loading="lazy" />
                 <div className="absolute top-1/2 -right-12 -translate-y-1/2 p-8 bg-sky-600 rounded-2xl shadow-4xl text-white font-black no-print">
                    <div className="text-4xl mb-1">09+</div>
                    <div className="text-[8px] uppercase tracking-[0.3em]">SERVICE YEARS</div>
@@ -29,19 +29,25 @@ const About: React.FC<AboutProps> = ({ DATA }) => {
                  {DATA.objective}
               </p>
               
-              {/* PERSONAL RECORD: THE IDENTITY BLOCK */}
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 p-8 bg-white border border-slate-200 rounded-[2.5rem] shadow-xl no-print">
-                 <div className="space-y-1">
-                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Date of Birth</div>
-                    <div className="text-slate-900 font-bold">{DATA.personal_info.dob}</div>
-                 </div>
-                 <div className="space-y-1">
-                    <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Status & Nationality</div>
-                    <div className="text-slate-900 font-bold">{DATA.personal_info.marital_status} | {DATA.personal_info.nationality}</div>
+               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16 p-8 bg-white border border-slate-200 rounded-[2.5rem] shadow-xl no-print">
+                  <div className="space-y-1">
+                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Date of Birth</div>
+                     <div className="text-slate-900 font-bold">{DATA.personal_info.dob}</div>
                   </div>
                   <div className="space-y-1">
-                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Languages Known</div>
-                     <div className="text-slate-900 font-bold">{DATA.personal_info.languages.join(', ')}</div>
+                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Status & Nationality</div>
+                     <div className="text-slate-900 font-bold">{DATA.personal_info.marital_status} | {DATA.personal_info.nationality}</div>
+                  </div>
+                  <div className="space-y-1">
+                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Contact Details</div>
+                     <div className="flex flex-col">
+                        <a href={`mailto:${DATA.email}`} className="text-sky-600 font-bold hover:underline">{DATA.email}</a>
+                        <a href={`tel:${DATA.phone}`} className="text-slate-900 font-bold hover:underline">{DATA.phone}</a>
+                     </div>
+                  </div>
+                  <div className="space-y-1">
+                     <div className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em]">Languages</div>
+                     <div className="text-slate-900 font-bold line-clamp-1">{DATA.personal_info.languages.join(', ')}</div>
                   </div>
                </div>
 

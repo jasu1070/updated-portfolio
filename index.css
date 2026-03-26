@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+@theme {
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", sans-serif;
+
+  --color-primary: #0ea5e9;
+  --color-primary-dark: #0284c7;
+  --color-accent: #10b981;
+
+  --shadow-4xl: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+
+  --animate-float: float 20s infinite linear;
+  --animate-float-delayed: float 25s infinite linear reverse;
+
+  @keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.95); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+}
+
+.bg-glow-1 {
+  animation: var(--animate-float);
+  will-change: transform;
+}
+
+.bg-glow-2 {
+  animation: var(--animate-float-delayed);
+  will-change: transform;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float-y {
+  animation: float-y 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-float-y-reverse {
+  animation: float-y 7s ease-in-out infinite reverse;
+  will-change: transform;
+}
+
+@keyframes subtle-zoom {
+  0% { transform: scale(1.1); opacity: 0; }
+  100% { transform: scale(1); opacity: 0.15; }
+}
+
+.animate-subtle-zoom {
+  animation: subtle-zoom 20s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+}
+
+.logo-dot-pulse {
+  box-shadow: 0 0 15px rgba(14, 165, 233, 0.6);
+}
+
+.precision-nav-blur {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.active-line {
+  height: 2px;
+  background: #0ea5e9;
+  box-shadow: 0 1px 4px rgba(14, 165, 233, 0.3);
+}
+
+@layer base {
+  :root {
+    --primary: #0ea5e9;
+    --primary-dark: #0284c7;
+    --accent: #10b981;
+    --bg-deep: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 overflow-x-hidden;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  .font-heading {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+}
+
+@layer utilities {
+  .no-print {
+    @media print {
+      display: none !important;
+    }
+  }
+
+  .animate-gradient {
+    background-size: 200% auto;
+    animation: gradient-flow 6s linear infinite;
+  }
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print Styles */
+@media print {
+  section {
+    page-break-inside: avoid;
+    border: none !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

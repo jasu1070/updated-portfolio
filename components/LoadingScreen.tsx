@@ -7,8 +7,8 @@ const LoadingScreen: React.FC = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 100 : prev + 2));
-    }, 30);
+      setProgress((prev) => (prev >= 100 ? 100 : prev + 3));
+    }, 50);
     return () => clearInterval(timer);
   }, []);
 
