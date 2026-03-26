@@ -13,10 +13,10 @@ export const RESUME_DATA: ResumeData = {
   profile_image: "profile/123.jpg",
   resume_url: "resume/JASHVANT.pdf",
   images: {
-    factory: "/generated/factory_real.png",
-    cnc: "/generated/cnc_real.png",
-    quality: "/generated/quality_real.png",
-    measure: "/generated/tools_real.png"
+    factory: "generated/factory_real.png",
+    cnc: "generated/cnc_real.png",
+    quality: "generated/quality_real.png",
+    measure: "generated/tools_real.png"
   },
 
   objective: "To secure a responsible position where I can apply my skills in machine operation, production quality, and technical processes, while contributing to the growth of the organization and developing my career.",
