@@ -6,7 +6,7 @@ import tailwind from '@tailwindcss/vite';
 export default defineConfig(({ mode }) => {
     const env = loadEnv(mode, '.', '');
     return {
-      base: '/updated-portfolio/',
+      base: '/',
       server: {
         port: 3000,
         host: '0.0.0.0',
